@@ -55,8 +55,8 @@ def build_np_dataset(root, batch_size, gpu_nums):
     return dset
 
 
-def compute_loss(train_step, dataset, strategy):
-    e_loss = strategy.experimental_run_v2(train_step, (dataset.get_next()))
+def compute_loss(train_step, data, strategy):
+    e_loss = strategy.experimental_run_v2(train_step, (data,))
     mean_e_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, e_loss, axis=None)
     return mean_e_losses
 
@@ -90,10 +90,10 @@ def training_loop(config: Config):
         print("Building tensorflow graph...")
 
         def train_step(image):
-            w = Encoder(img, training=True)
+            w = Encoder(image, training=True)
             x = Generator(w, y=None, is_training=True)
             with tf.variable_scope('recon_loss'):
-                recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
+                recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
                 e_loss = recon_loss_pixel
 
             add_global = global_step.assign_add(1)
@@ -102,7 +102,7 @@ def training_loop(config: Config):
                 E_opt = E_solver.minimize(e_loss, var_list=Encoder.trainable_variables)
                 with tf.control_dependencies([E_opt]):
                     return tf.identity(e_loss)
-        e_loss = compute_loss(train_step, dataset, strategy)
+        e_loss = compute_loss(train_step, dataset.get_next(), strategy)
         print("Building eval module...")
         with tf.init_scope():
             # IS, FID, eval_sample = compute_eval(eval_step, strategy, eval_z, data_iter)
