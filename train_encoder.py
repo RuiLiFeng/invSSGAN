@@ -24,7 +24,7 @@ parser.add_argument('--restore_d_dir', type=str, default='/ghome/fengrl/disc_ckp
 
 args = vars(parser.parse_args())
 
-model = import_module('training.' + args.model)
+model = import_module('training.' + args['model'])
 
 config = Config()
 config.set(**args)
