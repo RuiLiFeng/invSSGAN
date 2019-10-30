@@ -46,7 +46,7 @@ def parser_fn(img):
 
 def build_np_dataset(root, batch_size, gpu_nums):
     h5_dset = np_dataset(root, batch_size)
-    dset = tf.data.Dataset.from_generator(h5_dset.gen, tf.float32)
+    dset = tf.data.Dataset.from_generator(h5_dset.gen, tf.float32, output_shapes=[3, 128, 128])
     print('Making tensorflow dataset with length %d' % len(h5_dset))
     dset = dset.map(map_func=parser_fn, num_parallel_calls=3 * gpu_nums).shuffle(len(h5_dset)).batch(
         batch_size, drop_remainder=True).repeat().prefetch(tf.contrib.data.AUTOTUNE)
@@ -75,7 +75,6 @@ def training_loop(config: Config):
         # data_iter = dataset.make_initializable_iterator()
         print("Constructing networks...")
         img = dataset.get_next()
-        img = img.set_shape([None, 128, 128, 3])
         fixed_x = tf.placeholder(tf.float32, [None, 128, 128, 3])
         Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='vgg_alter')
         Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,

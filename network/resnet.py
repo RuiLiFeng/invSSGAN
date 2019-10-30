@@ -453,7 +453,7 @@ class Model(object):
                              custom_getter=self._custom_dtype_getter)
 
   @property
-  def trainbale_variables(self):
+  def trainable_variables(self):
       return [v for v in tf.trainable_variables() if self.name in v.name]
 
   def __call__(self, inputs, training):
