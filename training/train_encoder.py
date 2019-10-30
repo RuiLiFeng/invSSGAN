@@ -49,8 +49,8 @@ def build_np_dataset(root, batch_size, gpu_nums):
     return dset
 
 
-def compute_loss(train_step, strategy):
-    e_loss = strategy.experimental_run_v2(train_step, ())
+def compute_loss(train_step, data, strategy):
+    e_loss = strategy.experimental_run_v2(train_step, (data,))
     mean_e_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, e_loss, axis=None)
     return mean_e_losses
 
@@ -87,33 +87,34 @@ def training_loop(config: Config):
         # D_solver = tf.train.AdamOptimizer(learning_rate=learning_rate * 5, name='d_opt', beta1=config.beta1)
 
         print("Building tensorflow graph...")
-        w = Encoder(img, training=True)
-        x = Generator(w, y=None, is_training=True)
-        # _, real_logits, _ = Discriminator(img, y=None, is_training=True)
-        _, fake_logits, _ = Discriminator(x, y=None, is_training=True)
-        # real_logits = fp32(real_logits)
-        fake_logits = fp32(fake_logits)
-        with tf.variable_scope('recon_loss'):
-            recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
-            adv_loss = tf.reduce_mean(tf.nn.softplus(-fake_logits)) * config.g_loss_scale
-            vgg_real = VGG_alter(img, training=True)
-            vgg_fake = VGG_alter(x, training=True)
-            feature_scale = tf.cast(tf.reduce_prod(vgg_real.shape[1:]), dtype=tf.float32)
-            vgg_loss = config.r_loss_scale * tf.nn.l2_loss(vgg_fake - vgg_real) / (config.batch_size * feature_scale)
-            e_loss = recon_loss_pixel + adv_loss + vgg_loss
-        # with tf.variable_scope('d_loss'):
-        #     d_loss_real = tf.reduce_mean(tf.nn.relu(1.0 - real_logits))
-        #     d_loss_fake = tf.reduce_mean(tf.nn.relu(1.0 + fake_logits))
-        #     d_loss = d_loss_real + d_loss_fake
+        def train_step(image):
 
-        add_global = global_step.assign_add(1)
-        update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
-        def train_step():
+            w = Encoder(image, training=True)
+            x = Generator(w, y=None, is_training=True)
+            # _, real_logits, _ = Discriminator(img, y=None, is_training=True)
+            _, fake_logits, _ = Discriminator(x, y=None, is_training=True)
+            # real_logits = fp32(real_logits)
+            fake_logits = fp32(fake_logits)
+            with tf.variable_scope('recon_loss'):
+                recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
+                adv_loss = tf.reduce_mean(tf.nn.softplus(-fake_logits)) * config.g_loss_scale
+                vgg_real = VGG_alter(image, training=True)
+                vgg_fake = VGG_alter(x, training=True)
+                feature_scale = tf.cast(tf.reduce_prod(vgg_real.shape[1:]), dtype=tf.float32)
+                vgg_loss = config.r_loss_scale * tf.nn.l2_loss(vgg_fake - vgg_real) / (config.batch_size * feature_scale)
+                e_loss = recon_loss_pixel + adv_loss + vgg_loss
+            # with tf.variable_scope('d_loss'):
+            #     d_loss_real = tf.reduce_mean(tf.nn.relu(1.0 - real_logits))
+            #     d_loss_fake = tf.reduce_mean(tf.nn.relu(1.0 + fake_logits))
+            #     d_loss = d_loss_real + d_loss_fake
+
+            add_global = global_step.assign_add(1)
+            update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
             with tf.control_dependencies([add_global] + update_ops):
                 E_opt = E_solver.minimize(e_loss, var_list=Encoder.trainable_variables)
                 with tf.control_dependencies([E_opt]):
                     return tf.identity(e_loss)
-        e_loss = compute_loss(train_step, strategy)
+        e_loss = compute_loss(train_step, dataset.get_next(), strategy)
         print("Building eval module...")
         with tf.init_scope():
             fixed_w = Encoder(fixed_x, training=False)
