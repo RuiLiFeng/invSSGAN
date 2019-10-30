@@ -55,8 +55,8 @@ def build_np_dataset(root, batch_size, gpu_nums):
     return dset
 
 
-def compute_loss(train_step, strategy):
-    e_loss = strategy.experimental_run_v2(train_step, ())
+def compute_loss(train_step, dataset, strategy):
+    e_loss = strategy.experimental_run_v2(train_step, (dataset.get_next()))
     mean_e_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, e_loss, axis=None)
     return mean_e_losses
 
@@ -88,20 +88,21 @@ def training_loop(config: Config):
         E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta1=config.beta1)
 
         print("Building tensorflow graph...")
-        w = Encoder(img, training=True)
-        x = Generator(w, y=None, is_training=True)
-        with tf.variable_scope('recon_loss'):
-            recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
-            e_loss = recon_loss_pixel
 
-        add_global = global_step.assign_add(1)
-        update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
-        def train_step():
+        def train_step(image):
+            w = Encoder(img, training=True)
+            x = Generator(w, y=None, is_training=True)
+            with tf.variable_scope('recon_loss'):
+                recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
+                e_loss = recon_loss_pixel
+
+            add_global = global_step.assign_add(1)
+            update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
             with tf.control_dependencies([add_global] + update_ops):
                 E_opt = E_solver.minimize(e_loss, var_list=Encoder.trainable_variables)
                 with tf.control_dependencies([E_opt]):
                     return tf.identity(e_loss)
-        e_loss = compute_loss(train_step, strategy)
+        e_loss = compute_loss(train_step, dataset, strategy)
         print("Building eval module...")
         with tf.init_scope():
             # IS, FID, eval_sample = compute_eval(eval_step, strategy, eval_z, data_iter)
