@@ -122,6 +122,7 @@ def training_loop(config: Config):
             saver_g.restore(sess, config.restore_g_dir)
             timer.update()
             fixed_img = sess.run(dataset.get_next())
+            print('Saving fixed fake image to dir %s... ' % (config.model_dir + '/reals.png'))
             save_image_grid(fixed_img, filename=config.model_dir + '/reals.png')
             print("Completing all work, iteration now start, consuming %s " % timer.runing_time_format)
 

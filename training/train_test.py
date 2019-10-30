@@ -25,11 +25,9 @@ def load_from_h5(root='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5', batch_size=
 class np_dataset(object):
     def __init__(self, root='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5', batch_size=256):
         print('Loading data root %s into memory...' % root)
-        # with h5.File(root, 'r') as f:
-        #     self.img = f['imgs'][1:]
-        #     self.label = f['labels'][1:]
-        self.img = np.random.random(size=[300, 3,128,128])
-        self.label = np.random.random(size=[300])
+        with h5.File(root, 'r') as f:
+            self.img = f['imgs'][1:300]
+            self.label = f['labels'][1:300]
         self.num_imgs = len(self.label)
         self.index = np.arange(self.num_imgs)
         self.batch_size = batch_size
@@ -124,6 +122,7 @@ def training_loop(config: Config):
             saver_g.restore(sess, config.restore_g_dir)
             timer.update()
             fixed_img = sess.run(dataset.get_next())
+            print('Saving fixed fake image to dir %s... ' % (config.model_dir + '/reals.png'))
             save_image_grid(fixed_img, filename=config.model_dir + '/reals.png')
             print("Completing all work, iteration now start, consuming %s " % timer.runing_time_format)
 
