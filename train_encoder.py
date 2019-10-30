@@ -5,11 +5,11 @@ from argparse import ArgumentParser
 
 usage = 'Parser for all sample.'
 parser = ArgumentParser(description=usage)
-parser.add_argument('--batch_size', type=int, default=8,
+parser.add_argument('--batch_size', type=int, default=1024,
                     help='batch size for sample')
 parser.add_argument('--seed', type=int, default=23,
                     help='seed for np')
-parser.add_argument('--gpu_nums', type=int, default=1,
+parser.add_argument('--gpu_nums', type=int, default=4,
                     help='seed for np')
 parser.add_argument('--model_dir_root', type=str, default='/gdata/fengrl/SSGAN',
                     help='seed for np')

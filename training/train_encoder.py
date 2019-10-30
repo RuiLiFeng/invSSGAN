@@ -62,7 +62,7 @@ def training_loop(config: Config):
         with tf.variable_scope('recon_loss'):
             recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
             adv_loss = tf.reduce_mean(tf.nn.softplus(-fake_logits)) * config.g_loss_scale
-            e_loss = recon_loss_pixel
+            e_loss = recon_loss_pixel + adv_loss
         with tf.variable_scope('d_loss'):
             d_loss_real = tf.reduce_mean(tf.nn.relu(1.0 - real_logits))
             d_loss_fake = tf.reduce_mean(tf.nn.relu(1.0 + fake_logits))
