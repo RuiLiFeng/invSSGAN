@@ -22,8 +22,10 @@ parser.add_argument('--restore_g_dir', type=str, default='/ghome/fengrl/gen_ckpt
 parser.add_argument('--restore_d_dir', type=str, default='/ghome/fengrl/disc_ckpt/disc-0',
                     help='seed for np')
 
-model = import_module('training.' + parser.model)
 args = vars(parser.parse_args())
+
+model = import_module('training.' + args.model)
+
 config = Config()
 config.set(**args)
 config.make_task_dir()
