@@ -43,6 +43,7 @@ def parser_fn(img):
 def build_np_dataset(root, batch_size, gpu_nums):
     h5_dset = np_dataset(root, batch_size)
     dset = tf.data.Dataset.from_generator(h5_dset.gen, tf.float32)
+    print('Making tensorflow dataset with length %d' % len(h5_dset))
     dset = dset.map(map_func=parser_fn, num_parallel_calls=3 * gpu_nums).shuffle(len(h5_dset)).batch(
         batch_size, drop_remainder=True).repeat().prefetch(tf.contrib.data.AUTOTUNE)
     return dset
