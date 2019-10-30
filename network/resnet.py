@@ -449,7 +449,7 @@ class Model(object):
       A variable scope for the model.
     """
 
-    return tf.variable_scope(self.name,
+    return tf.variable_scope(self.name, reuse=tf.AUTO_REUSE,
                              custom_getter=self._custom_dtype_getter)
 
   @property
