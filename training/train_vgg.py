@@ -11,7 +11,8 @@ import numpy as np
 
 def load_from_h5(root='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5', batch_size=256, shuffle_batch_size=10000):
     with h5.File(root, 'r') as f:
-        img = (f['imgs'][1:] / 255.0).astype(np.float32).transpose([0, 2, 3, 1])
+        img = f['imgs'][1:]
+        # img = (f['imgs'][1:] / 255.0).astype(np.float32).transpose([0, 2, 3, 1])
         label = f['labels'][1:]
     dset = tf.data.Dataset.from_tensor_slices((img, label))
     dset = dset.shuffle(shuffle_batch_size).batch(batch_size).prefetch(tf.contrib.data.AUTOTUNE)
@@ -88,6 +89,7 @@ def training_loop(config: Config):
             print("Start iterations...")
             for iteration in range(config.total_step):
                 img_, _ = sess.run(dataset.get_next())
+                img_ = (img_ / 255.0).astype(np.float32).transpose([0, 2, 3, 1])
                 e_loss_, lr_ = sess.run([e_loss, learning_rate], {img: img_})
                 if iteration % config.print_loss_per_steps == 0:
                     timer.update()

@@ -42,7 +42,8 @@ def training_loop(config: Config):
         print("Constructing networks...")
         img = tf.placeholder(tf.float32, [None, 128, 128, 3])
         Encoder = keras.applications.ResNet50(weights=None, classes=config.dim_z)
-        Generator = resnet_biggan.Generator(image_shape=[128,128,3], embed_y=False,
+        VGG_alter = keras.applications.ResNet50(weights=None, classes=config.dim_z)
+        Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                             embed_z=False,
                                             batch_norm_fn=arch_ops.self_modulated_batch_norm,
                                             spectral_norm=True)
@@ -62,7 +63,11 @@ def training_loop(config: Config):
         with tf.variable_scope('recon_loss'):
             recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
             adv_loss = tf.reduce_mean(tf.nn.softplus(-fake_logits)) * config.g_loss_scale
-            e_loss = recon_loss_pixel + adv_loss
+            vgg_real = VGG_alter(img)
+            vgg_fake = VGG_alter(x)
+            feature_scale = tf.cast(tf.reduce_prod(vgg_real.shape[1:]), dtype=tf.float32)
+            vgg_loss = config.r_loss_scale * tf.nn.l2_loss(vgg_fake - vgg_real) / (config.batch_size * feature_scale)
+            e_loss = recon_loss_pixel + adv_loss + vgg_loss
         with tf.variable_scope('d_loss'):
             d_loss_real = tf.reduce_mean(tf.nn.relu(1.0 - real_logits))
             d_loss_fake = tf.reduce_mean(tf.nn.relu(1.0 + fake_logits))
