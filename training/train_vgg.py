@@ -92,7 +92,6 @@ def training_loop(config: Config):
             recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
             e_loss = recon_loss_pixel
 
-
         add_global = global_step.assign_add(1)
         update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
         def train_step():
@@ -137,7 +136,7 @@ def training_loop(config: Config):
                     fixed_ = sess.run(fixed_sample, {fixed_x: fixed_img})
                     save_image_grid(fixed_, filename=config.model_dir + '/fakes%06d.png' % iteration)
                 if iteration % config.save_per_steps == 0:
-                    saver_e.save(sess, save_path=config.model_dir + '/en.ckpt',
+                    saver_e.save(sess, save_path=config.model_dir + '/vgg.ckpt',
                                  global_step=iteration, write_meta_graph=False)
 
 
