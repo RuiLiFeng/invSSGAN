@@ -37,7 +37,7 @@ class np_dataset(object):
 
 
 def parser_fn(img):
-    return img.transpose([1, 2, 0]).astype(np.float32) / 255.0
+    return tf.cast(tf.transpose(img, [1, 2, 0]), tf.float32) / 255.0
 
 
 def build_np_dataset(root, batch_size, gpu_nums):
