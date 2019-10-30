@@ -75,9 +75,8 @@ def training_loop(config: Config):
         # data_iter = dataset.make_initializable_iterator()
         print("Constructing networks...")
         img = dataset.get_next()
+        img = img.set_shape([None, 128, 128, 3])
         fixed_x = tf.placeholder(tf.float32, [None, 128, 128, 3])
-        Encoder = keras.applications.ResNet50(weights=None, classes=120, include_top=False,
-                                              input_shape=[128, 128, 3], pooling='avg')
         Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='vgg_alter')
         Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                             embed_z=False,
