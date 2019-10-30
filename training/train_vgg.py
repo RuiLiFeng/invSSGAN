@@ -4,6 +4,7 @@ from network import SSGAN, loss_lib, penalty_lib, tfmetric, resnet_biggan, arch_
 import logging
 from tensorflow import keras
 import tensorflow_datasets as tfds
+from network.resnet import ImagenetModel
 import h5py as h5
 from tqdm import tqdm
 import numpy as np
@@ -75,7 +76,9 @@ def training_loop(config: Config):
         print("Constructing networks...")
         img = dataset.get_next()
         fixed_x = tf.placeholder(tf.float32, [None, 128, 128, 3])
-        Encoder = keras.applications.ResNet50(weights=None, classes=config.dim_z)
+        Encoder = keras.applications.ResNet50(weights=None, classes=120, include_top=False,
+                                              input_shape=[128, 128, 3], pooling='avg')
+        Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='vgg_alter')
         Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                             embed_z=False,
                                             batch_norm_fn=arch_ops.self_modulated_batch_norm,
@@ -85,7 +88,7 @@ def training_loop(config: Config):
         E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta1=config.beta1)
 
         print("Building tensorflow graph...")
-        w = Encoder(img)
+        w = Encoder(img, training=True)
         x = Generator(w, y=None, is_training=True)
         with tf.variable_scope('recon_loss'):
             recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
@@ -103,7 +106,7 @@ def training_loop(config: Config):
         print("Building eval module...")
         with tf.init_scope():
             # IS, FID, eval_sample = compute_eval(eval_step, strategy, eval_z, data_iter)
-            fixed_w = Encoder(fixed_x)
+            fixed_w = Encoder(fixed_x, training=False)
             fixed_sample = Generator(z=fixed_w, y=None, is_training=False)
         print('Building init module...')
         with tf.init_scope():

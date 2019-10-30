@@ -2,7 +2,7 @@ from datasets import get_dataset
 from utils.training_utils import *
 from network import SSGAN, loss_lib, penalty_lib, tfmetric, resnet_biggan, arch_ops
 import logging
-from tensorflow import keras
+from network.resnet import ImagenetModel
 import tensorflow_datasets as tfds
 import h5py as h5
 from tqdm import tqdm
@@ -74,8 +74,8 @@ def training_loop(config: Config):
         # img = tf.placeholder(tf.float32, [None, 128, 128, 3])
         fixed_x = tf.placeholder(tf.float32, [None, 128, 128, 3])
         img = dataset.get_next()
-        Encoder = keras.applications.ResNet50(weights=None, classes=config.dim_z)
-        VGG_alter = keras.applications.ResNet50(weights=None, classes=config.dim_z)
+        Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='Encoder')
+        VGG_alter = ImagenetModel(resnet_size=50, num_classes=120, name='vgg_alter')
         Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                             embed_z=False,
                                             batch_norm_fn=arch_ops.self_modulated_batch_norm,
@@ -87,7 +87,7 @@ def training_loop(config: Config):
         # D_solver = tf.train.AdamOptimizer(learning_rate=learning_rate * 5, name='d_opt', beta1=config.beta1)
 
         print("Building tensorflow graph...")
-        w = Encoder(img)
+        w = Encoder(img, training=True)
         x = Generator(w, y=None, is_training=True)
         # _, real_logits, _ = Discriminator(img, y=None, is_training=True)
         _, fake_logits, _ = Discriminator(x, y=None, is_training=True)
@@ -96,8 +96,8 @@ def training_loop(config: Config):
         with tf.variable_scope('recon_loss'):
             recon_loss_pixel = tf.reduce_mean(tf.square(x - img))
             adv_loss = tf.reduce_mean(tf.nn.softplus(-fake_logits)) * config.g_loss_scale
-            vgg_real = VGG_alter(img)
-            vgg_fake = VGG_alter(x)
+            vgg_real = VGG_alter(img, training=True)
+            vgg_fake = VGG_alter(x, training=True)
             feature_scale = tf.cast(tf.reduce_prod(vgg_real.shape[1:]), dtype=tf.float32)
             vgg_loss = config.r_loss_scale * tf.nn.l2_loss(vgg_fake - vgg_real) / (config.batch_size * feature_scale)
             e_loss = recon_loss_pixel + adv_loss + vgg_loss
@@ -116,7 +116,7 @@ def training_loop(config: Config):
         e_loss = compute_loss(train_step, strategy)
         print("Building eval module...")
         with tf.init_scope():
-            fixed_w = Encoder(fixed_x)
+            fixed_w = Encoder(fixed_x, training=False)
             fixed_sample = Generator(z=fixed_w, y=None, is_training=False)
         print('Building init module...')
         with tf.init_scope():
