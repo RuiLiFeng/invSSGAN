@@ -13,6 +13,8 @@ parser.add_argument('--seed', type=int, default=23,
                     help='seed for np')
 parser.add_argument('--gpu_nums', type=int, default=4,
                     help='seed for np')
+parser.add_argument('--r_loss_scale', type=float, default=0.4,
+                    help='seed for np')
 parser.add_argument('--model_dir_root', type=str, default='/gdata1/fengrl/SSGAN',
                     help='seed for np')
 parser.add_argument('--h5root', type=str, default='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5',
