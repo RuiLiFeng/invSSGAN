@@ -110,7 +110,7 @@ class Config(object):
                  ssgan_gen_dir='/ghome/fengrl/gen-0',
                  ssgan_disc_dir='/ghome/fengrl/disc-0',
                  write_h5_dir='/gpub/temp/imagenet2012',
-                 print_loss_per_steps=10,
+                 print_loss_per_steps=100,
                  summary_per_steps=100,
                  eval_per_steps=1000,
                  save_per_steps=2000,

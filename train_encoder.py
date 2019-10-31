@@ -17,6 +17,8 @@ parser.add_argument('--model_dir_root', type=str, default='/gdata1/fengrl/SSGAN'
                     help='seed for np')
 parser.add_argument('--h5root', type=str, default='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5',
                     help='seed for np')
+parser.add_argument('--finalize', action='store_true', default=False,
+                    help='seed for np')
 parser.add_argument('--restore_g_dir', type=str, default='/ghome/fengrl/gen_ckpt/gen-0',
                     help='seed for np')
 parser.add_argument('--restore_d_dir', type=str, default='/ghome/fengrl/disc_ckpt/disc-0',
