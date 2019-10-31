@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/training/train_encoder_multi_gpu.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/train_vgg.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/train_vgg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/training_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/training_utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/train_encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2889">
-              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="567">
+              <caret line="142" column="50" selection-start-line="142" selection-start-column="50" selection-end-line="142" selection-end-column="50" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
                 <marker date="1572458672863" expanded="true" signature="4478:4523" ph="..." />
@@ -29,9 +28,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/training/train_encoder_multi_gpu.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/training_loop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3348">
+            <state relative-caret-position="-1315">
               <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -43,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/train_vgg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="762">
-              <caret line="62" column="37" selection-start-line="62" selection-start-column="37" selection-end-line="62" selection-end-column="37" />
+            <state relative-caret-position="252">
+              <caret line="25" column="51" lean-forward="true" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -55,8 +63,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="19" column="42" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="42" />
+            <state relative-caret-position="634">
+              <caret line="25" column="81" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -67,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/np_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="36" column="15" lean-forward="true" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
+            <state relative-caret-position="288">
+              <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -109,20 +117,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/network/resnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="451" column="60" lean-forward="true" selection-start-line="451" selection-start-column="60" selection-end-line="451" selection-end-column="60" />
+            <state relative-caret-position="465">
+              <caret line="459" column="18" selection-start-line="459" selection-start-column="18" selection-end-line="459" selection-end-column="18" />
               <folding>
                 <element signature="e#1280#1318#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/network/abstract_arch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-200">
-              <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -154,8 +153,10 @@
       <find>sel</find>
       <find>bn_axis</find>
       <find>prefe</find>
-      <find>img</find>
       <find>map</find>
+      <find>zeros</find>
+      <find>tile</find>
+      <find>img</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -172,11 +173,12 @@
         <option value="$PROJECT_DIR$/utils/np_dataset.py" />
         <option value="$PROJECT_DIR$/utils/training_utils.py" />
         <option value="$PROJECT_DIR$/training/train_vgg.py" />
+        <option value="$PROJECT_DIR$/training/train_encoder_multi_gpu.py" />
         <option value="$PROJECT_DIR$/train_encoder.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -273,18 +275,18 @@
       <workItem from="1572255555581" duration="2452000" />
       <workItem from="1572394076744" duration="14121000" />
       <workItem from="1572392427411" duration="782000" />
-      <workItem from="1572393282549" duration="40164000" />
+      <workItem from="1572393282549" duration="44411000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40946000" />
+    <option name="totallyTimeSpent" value="45193000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.23938224" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13219616" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -298,8 +300,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.31019524" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.28850326" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.053145338" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.28850326" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -432,50 +434,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/network/resnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="451" column="60" lean-forward="true" selection-start-line="451" selection-start-column="60" selection-end-line="451" selection-end-column="60" />
-          <folding>
-            <element signature="e#1280#1318#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/training/train_encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2889">
-          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-            <marker date="1572458672863" expanded="true" signature="4478:4523" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/training/train_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="133" column="75" lean-forward="true" selection-start-line="133" selection-start-column="75" selection-end-line="133" selection-end-column="75" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datasets.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="210" column="35" lean-forward="true" selection-start-line="210" selection-start-column="35" selection-end-line="210" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/np_dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="36" column="15" lean-forward="true" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -487,9 +451,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/np_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datasets.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="210" column="35" lean-forward="true" selection-start-line="210" selection-start-column="35" selection-end-line="210" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/network/resnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="459" column="18" selection-start-line="459" selection-start-column="18" selection-end-line="459" selection-end-column="18" />
+          <folding>
+            <element signature="e#1280#1318#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/train_vgg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="25" column="51" lean-forward="true" selection-start-line="25" selection-start-column="51" selection-end-line="25" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/train_encoder_multi_gpu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/training/training_loop.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3348">
+        <state relative-caret-position="-1315">
           <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -497,20 +505,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/train_vgg.py">
+    <entry file="file://$PROJECT_DIR$/training/train_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="62" column="37" selection-start-line="62" selection-start-column="37" selection-end-line="62" selection-end-column="37" />
+        <state relative-caret-position="567">
+          <caret line="142" column="50" selection-start-line="142" selection-start-column="50" selection-end-line="142" selection-end-column="50" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
+            <marker date="1572458672863" expanded="true" signature="4478:4523" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/train_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="19" column="42" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="42" />
+        <state relative-caret-position="634">
+          <caret line="25" column="81" selection-start-line="25" selection-start-column="81" selection-end-line="25" selection-end-column="81" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
