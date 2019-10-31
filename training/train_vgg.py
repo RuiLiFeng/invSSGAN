@@ -59,7 +59,7 @@ def training_loop(config: Config):
         print("Start training...")
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
             sess.run(init)
-            fixed_img = sess.run(dataset.get_next())
+            fixed_img, _ = sess.run(dataset.get_next())
             print('Saving fixed fake image to dir %s... ' % (config.model_dir + '/reals.png'))
             save_image_grid(fixed_img, filename=config.model_dir + '/reals.png')
             timer.update()
