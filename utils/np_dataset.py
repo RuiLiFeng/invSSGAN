@@ -30,7 +30,7 @@ def build_np_dataset(root, batch_size, gpu_nums, dset_name='ssgan_sample'):
     np_dset = {'ssgan_sample': ssgan_sample}[dset_name]
     h5_dset = np_dset(root, batch_size)
     dset = tf.data.Dataset.from_generator(h5_dset.gen, (tf.float32, tf.float32),
-                                          output_shapes=([3, 128, 128], [120]))
+                                          output_shapes=([128, 128, 3], [120]))
     print('Making tensorflow dataset with length %d' % len(h5_dset))
     dset = dset.shuffle(len(h5_dset)).batch(
         batch_size, drop_remainder=True).repeat().prefetch(tf.contrib.data.AUTOTUNE)
