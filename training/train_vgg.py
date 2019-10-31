@@ -12,7 +12,7 @@ from utils import np_dataset
 
 
 def compute_loss(train_step, data, strategy):
-    e_loss = strategy.experimental_run_v2(train_step, (data,))
+    e_loss = strategy.experimental_run_v2(train_step, data)
     mean_e_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, e_loss, axis=None)
     return mean_e_losses
 
