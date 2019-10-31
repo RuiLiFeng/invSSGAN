@@ -59,11 +59,12 @@ def training_loop(config: Config):
         print("Start training...")
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
             sess.run(init)
-            if config.finalize:
-                sess.graph.finalize()
+            # This step will add op into graph, so we moved it before freeze
             fixed_img, _ = sess.run(dataset.get_next())
             print('Saving fixed fake image to dir %s... ' % (config.model_dir + '/reals.png'))
             save_image_grid(fixed_img, filename=config.model_dir + '/reals.png')
+            if config.finalize:
+                sess.graph.finalize()
             timer.update()
             print("Completing all work, iteration now start, consuming %s " % timer.runing_time_format)
 
