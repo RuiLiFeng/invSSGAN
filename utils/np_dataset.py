@@ -16,13 +16,15 @@ class ssgan_sample(object):
 
     def gen(self):
         for i in self.index:
-            yield self.img[i], self.w[i]
+            yield {'img': self.img[i], 'w': self.w[i]}
 
     def __len__(self):
         return self.num_imgs
 
 
-def parser_fn(img, w):
+def parser_fn(feature):
+    img = feature['img']
+    w = feature['w']
     return tf.cast(tf.transpose(img, [1, 2, 0]), tf.float32) / 255.0, w
 
 
