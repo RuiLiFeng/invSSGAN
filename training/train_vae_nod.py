@@ -17,7 +17,7 @@ class np_dataset(object):
             self.img = f['imgs']
             self.label = f['labels']
         self.num_imgs = len(self.label) - 1
-        self.index = np.arange(1, self.num_imgs)
+        self.index = np.arange(1, self.num_imgs + 1)
         self.batch_size = batch_size // 4
 
     def gen(self):
