@@ -23,6 +23,7 @@ def training_loop(config: Config):
     strategy = tf.distribute.MirroredStrategy()
     print('Loading Imagenet2012 dataset...')
     dataset = np_dataset.build_np_dataset(root=config.h5root, batch_size=config.batch_size, gpu_nums=config.gpu_nums)
+    # dataset = strategy.experimental_distribute_dataset(dataset)
     dataset = dataset.make_initializable_iterator()
     with strategy.scope():
         global_step = tf.get_variable(name='global_step', initializer=tf.constant(0), trainable=False,
@@ -61,6 +62,7 @@ def training_loop(config: Config):
             sess.run(init)
             # This step will add op into graph, so we moved it before freeze
             fixed_img, _ = sess.run(dataset.get_next())
+            print(fixed_img.shape)
             print('Saving fixed fake image to dir %s... ' % (config.model_dir + '/reals.png'))
             save_image_grid(fixed_img, filename=config.model_dir + '/reals.png')
             if config.finalize:

@@ -25,7 +25,7 @@ parser.add_argument('--restore_g_dir', type=str, default='/ghome/fengrl/gen_ckpt
                     help='seed for np')
 parser.add_argument('--restore_d_dir', type=str, default='/ghome/fengrl/disc_ckpt/disc-0',
                     help='seed for np')
-parser.add_argument('--restore_v_dir', type=str, default='/gdata1/fengrl/SSGAN/00020-invSSGAN/vgg-0',
+parser.add_argument('--restore_v_dir', type=str, default='/gdata/fengrl/SSGAN/00101-invSSGAN/',
                     help='seed for np')
 
 args = vars(parser.parse_args())
