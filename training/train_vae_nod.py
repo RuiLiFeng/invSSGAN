@@ -47,7 +47,7 @@ def build_np_dataset(root, batch_size, gpu_nums):
 
 
 def compute_loss(train_step, data, sample_data, strategy):
-    e_loss, r_loss, s_loss = strategy.experimental_run_v2(train_step, data + sample_data)
+    e_loss, r_loss, s_loss = strategy.experimental_run_v2(train_step, (data,) + sample_data)
     mean_e_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, e_loss, axis=None)
     mean_r_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, r_loss, axis=None)
     mean_s_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, s_loss, axis=None)
@@ -115,7 +115,7 @@ def training_loop(config: Config):
 
         print('Building init module...')
         with tf.init_scope():
-            init = [tf.global_variables_initializer(), dataset.initializer]
+            init = [tf.global_variables_initializer(), dataset.initializer, sample_dset.initializer]
             restore_g = [v for v in tf.global_variables() if 'opt' not in v.name
                          and 'beta1_power' not in v.name
                          and 'beta2_power' not in v.name
