@@ -36,7 +36,7 @@ def training_loop(config: Config):
         # data_iter = dataset.make_initializable_iterator()
         print("Constructing networks...")
         Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='vgg_alter')
-        learning_rate = tf.train.exponential_decay(0.0001, global_step, 150000 / config.gpu_nums,
+        learning_rate = tf.train.exponential_decay(config.lr, global_step, 150000 / config.gpu_nums,
                                                    0.8, staircase=False)
         E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta1=config.beta1)
 
