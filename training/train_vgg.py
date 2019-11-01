@@ -22,7 +22,8 @@ def training_loop(config: Config):
     print("Start task {}".format(config.task_name))
     strategy = tf.distribute.MirroredStrategy()
     print('Loading Imagenet2012 dataset...')
-    dataset = np_dataset.build_np_dataset(root=config.h5root, gpu_nums=config.gpu_nums, load_in_mem=config.load_in_mem,
+    dataset = np_dataset.build_np_dataset(root=config.h5root, batch_size=config.batch_size,
+                                          gpu_nums=config.gpu_nums, load_in_mem=config.load_in_mem,
                                           load_num=config.load_num)
     dataset = strategy.experimental_distribute_dataset(dataset)
     dataset = dataset.make_initializable_iterator()
