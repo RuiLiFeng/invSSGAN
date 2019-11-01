@@ -14,10 +14,10 @@ class np_dataset(object):
     def __init__(self, root='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5', batch_size=256):
         print('Loading data root %s into memory...' % root)
         with h5.File(root, 'r') as f:
-            self.img = f['imgs'][1:1000]
-            self.label = f['labels'][1:1000]
-        self.num_imgs = len(self.label)
-        self.index = np.arange(self.num_imgs)
+            self.img = f['imgs']
+            self.label = f['labels']
+        self.num_imgs = len(self.label) - 1
+        self.index = np.arange(1, self.num_imgs)
         self.batch_size = batch_size // 4
 
     def gen(self):
