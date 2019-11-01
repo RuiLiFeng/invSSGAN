@@ -19,9 +19,15 @@ parser.add_argument('--seed', type=int, default=23,
                     help='seed for np')
 parser.add_argument('--gpu_nums', type=int, default=4,
                     help='seed for np')
+parser.add_argument('--eval_per_steps', type=int, default=2000,
+                    help='seed for np')
+parser.add_argument('--save_per_steps', type=int, default=2000,
+                    help='seed for np')
 parser.add_argument('--r_loss_scale', type=float, default=0.4,
                     help='seed for np')
 parser.add_argument('--lr', type=float, default=0.0001,
+                    help='seed for np')
+parser.add_argument('--g_loss_scale', type=float, default=0.03,
                     help='seed for np')
 parser.add_argument('--model_dir_root', type=str, default='/gdata1/fengrl/SSGAN',
                     help='seed for np')
