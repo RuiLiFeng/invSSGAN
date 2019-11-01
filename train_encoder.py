@@ -7,6 +7,10 @@ usage = 'Parser for all sample.'
 parser = ArgumentParser(description=usage)
 parser.add_argument('--model', type=str, default='train_vgg',
                     help='seed for np')
+parser.add_argument('--load_in_mem', action='store_true', default=False,
+                    help='seed for np')
+parser.add_argument('--load_num', type=int, default=None,
+                    help='seed for np')
 parser.add_argument('--batch_size', type=int, default=1024,
                     help='batch size for sample')
 parser.add_argument('--seed', type=int, default=23,

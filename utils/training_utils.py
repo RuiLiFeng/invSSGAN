@@ -30,9 +30,9 @@ class Timer(object):
     @property
     def runing_time_format(self):
         du = self._last_update_time - self._init_time
-        mins = du // 60
-        hours = mins // 60
-        days = hours // 24
+        mins, du = divmod(du, 60)
+        hours, mins = divmod(mins, 60)
+        days, hours = divmod(hours, 24)
         return '%d days, %d hours, %d mins, %f secs' % (days, hours, mins, du % 60)
 
 
