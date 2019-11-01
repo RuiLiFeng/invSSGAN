@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/np_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/np_dataset.py" afterDir="false" />
-    </list>
+    <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/training_loop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1315">
-              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+            <state relative-caret-position="449">
+              <caret line="37" column="57" lean-forward="true" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -47,14 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/training/train_vgg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="21" column="51" lean-forward="true" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-288">
+              <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -80,14 +74,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/np_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="44" selection-start-line="44" selection-end-line="44" />
+            <state relative-caret-position="1060">
+              <caret line="43" column="68" lean-forward="true" selection-start-line="43" selection-start-column="68" selection-end-line="43" selection-end-column="68" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/training/train_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
             </state>
           </provider>
         </entry>
@@ -155,7 +158,6 @@
         <option value="$PROJECT_DIR$/training/training_loop.py" />
         <option value="$PROJECT_DIR$/network/resnet_biggan_ssgan.py" />
         <option value="$PROJECT_DIR$/network/resnet.py" />
-        <option value="$PROJECT_DIR$/training/train_test.py" />
         <option value="$PROJECT_DIR$/training/train_encoder_multi_gpu.py" />
         <option value="$PROJECT_DIR$/training/train_encoder.py" />
         <option value="$PROJECT_DIR$/write_tfrecords.py" />
@@ -163,6 +165,7 @@
         <option value="$PROJECT_DIR$/train_encoder.py" />
         <option value="$PROJECT_DIR$/training/train_vgg.py" />
         <option value="$PROJECT_DIR$/utils/np_dataset.py" />
+        <option value="$PROJECT_DIR$/training/train_test.py" />
       </list>
     </option>
   </component>
@@ -263,17 +266,18 @@
       <workItem from="1572255555581" duration="2452000" />
       <workItem from="1572394076744" duration="14121000" />
       <workItem from="1572392427411" duration="782000" />
-      <workItem from="1572393282549" duration="56010000" />
+      <workItem from="1572393282549" duration="56393000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56792000" />
+    <option name="totallyTimeSpent" value="57175000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2027027" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20255864" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -287,7 +291,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.2646421" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.35249457" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.29067245" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -414,16 +418,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/train_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="133" column="75" lean-forward="true" selection-start-line="133" selection-start-column="75" selection-end-line="133" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datasets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
@@ -459,16 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/training_loop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1315">
-          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/write_tfrecords.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1008">
@@ -493,6 +477,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/training/train_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/train_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -503,23 +494,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/train_vgg.py">
+    <entry file="file://$PROJECT_DIR$/utils/np_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="21" column="51" lean-forward="true" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+        <state relative-caret-position="1060">
+          <caret line="43" column="68" lean-forward="true" selection-start-line="43" selection-start-column="68" selection-end-line="43" selection-end-column="68" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/training_loop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="37" column="57" lean-forward="true" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/np_dataset.py">
+    <entry file="file://$PROJECT_DIR$/training/train_vgg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-288">
+          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
