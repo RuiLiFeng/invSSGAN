@@ -27,8 +27,9 @@ class np_dataset(object):
                 yield f['imgs'][i + 1]
 
     def fixed_sample(self):
-        index = np.random.randint(0, self.num_imgs, self.batch_size)
-        return self.img[index].transpose([0, 2, 3, 1]) / 255.0
+        index = np.random.randint(1, self.num_imgs + 1, self.batch_size)
+        with h5.File(self.root, 'r') as f:
+            return f['imgs'][index].transpose([0, 2, 3, 1]) / 255.0
 
     def __len__(self):
         return self.num_imgs
