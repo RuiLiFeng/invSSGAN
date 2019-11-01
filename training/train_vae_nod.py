@@ -18,7 +18,7 @@ class np_dataset(object):
             self.label = f['labels'][1:1000]
         self.num_imgs = len(self.label)
         self.index = np.arange(self.num_imgs)
-        self.batch_size = batch_size
+        self.batch_size = batch_size / 4
 
     def gen(self):
         for i in self.index:
@@ -107,11 +107,11 @@ def training_loop(config: Config):
         e_loss, r_loss, s_loss = compute_loss(train_step, dataset.get_next(), sample_dset.get_next(), strategy)
         print("Building eval module...")
         with tf.init_scope():
-            def eval_fn():
-                fixed_w = Encoder(fixed_x, training=False)
-                fixed_sample = Generator(z=fixed_w, y=None, is_training=False)
-                return fixed_sample
-            fixed_sample = strategy.experimental_run_v2(eval_fn, ())
+            # def eval_fn():
+            fixed_w = Encoder(fixed_x, training=False)
+            fixed_sample = Generator(z=fixed_w, y=None, is_training=False)
+                # return fixed_sample
+            # fixed_sample = strategy.experimental_run_v2(eval_fn, ())
 
         print('Building init module...')
         with tf.init_scope():
