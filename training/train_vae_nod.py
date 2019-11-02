@@ -19,6 +19,7 @@ class np_dataset(object):
             self.label = f['labels'][1:]
         self.num_imgs = len(self.label)
         self.index = np.arange(self.num_imgs)
+        np.random.shuffle(self.index)
         self.batch_size = batch_size // 4
 
     def gen(self):
@@ -45,7 +46,7 @@ def build_np_dataset(root, batch_size, gpu_nums):
     fixed_img = h5_dset.fixed_sample()
     dset = tf.data.Dataset.from_generator(h5_dset.gen, tf.float32, output_shapes=[3, 128, 128])
     print('Making tensorflow dataset with length %d' % len(h5_dset))
-    dset = dset.map(map_func=parser_fn, num_parallel_calls=3 * gpu_nums).shuffle(len(h5_dset)).batch(
+    dset = dset.map(map_func=parser_fn, num_parallel_calls=3 * gpu_nums).shuffle(10000).batch(
         batch_size, drop_remainder=True).repeat().prefetch(tf.contrib.data.AUTOTUNE)
     return dset, fixed_img
 
