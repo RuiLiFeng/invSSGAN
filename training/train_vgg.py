@@ -63,7 +63,7 @@ def training_loop(config: Config):
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
             sess.run(init)
             if config.resume:
-                saver_e.restore(sess, '/gdata1/fengrl/SSGAN/00020-invSSGAN/vgg.ckpt-166000')
+                saver_e.restore(sess, config.restore_v_dir)
             # # This step will add op into graph, so we moved it before freeze
             # fixed_img, _ = sess.run(dataset.get_next())
             # print(fixed_img.shape)
