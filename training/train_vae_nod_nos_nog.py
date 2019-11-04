@@ -68,7 +68,7 @@ def training_loop(config: Config):
                                       aggregation=tf.VariableAggregation.ONLY_FIRST_REPLICA)
         print("Constructing networks...")
         fixed_x = tf.placeholder(tf.float32, [None, 128, 128, 3])
-        Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='Encoder')
+        Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='vgg')
         Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                             embed_z=False,
                                             batch_norm_fn=arch_ops.self_modulated_batch_norm,
