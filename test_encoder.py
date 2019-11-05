@@ -41,7 +41,9 @@ G_embed = tf.convert_to_tensor(G_embed_np, dtype=tf.float32, name='G_embed')
 
 z = tf.random.normal([args.batch_size, 120], stddev=1.0, name='z')
 wz = tf.matmul(z, G_embed)
-index = np.random.randint(0, 1000000, args.batch_size)
+index = np.arange(1000000)
+np.random.shuffle(index)
+index = index[:args.batch_size]
 index.sort()
 with h5.File(args.h5root, 'r') as f:
     img = f['imgs'][index].transpose([0, 2, 3, 1]) / 255.0
