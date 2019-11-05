@@ -54,6 +54,7 @@ w = Encoder(x, training=True)
 fake_ = Generator(w, y=None, is_training=True)
 fake_ss_ = Generator(wz, y=None, is_training=True)
 update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
+print(update_ops)
 with tf.control_dependencies(update_ops):
     fake = tf.identity(fake_)
     fake_ss = tf.identity(fake_ss_)
