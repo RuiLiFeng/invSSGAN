@@ -29,7 +29,7 @@ parser.add_argument('--save_name', type=str, default='vae-16000',
                     help='seed for np')
 
 
-args = vars(parser.parse_args())
+args = parser.parse_args()
 
 Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='Encoder')
 Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,
