@@ -51,12 +51,12 @@ with h5.File(args.h5root, 'r') as f:
     img = f['imgs'][list(index)].transpose([0, 2, 3, 1]) / 255.0
 x = tf.placeholder(tf.float32, [args.batch_size, 128, 128, 3])
 w = Encoder(x, training=True)
-fake = Generator(w, y=None, is_training=True)
-fake_ss = Generator(wz, y=None, is_training=True)
+fake_ = Generator(w, y=None, is_training=True)
+fake_ss_ = Generator(wz, y=None, is_training=True)
 update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
 with tf.control_dependencies(update_ops):
-    fake = tf.identity(fake)
-    fake_ss = tf.identity(fake_ss)
+    fake = tf.identity(fake_)
+    fake_ss = tf.identity(fake_ss_)
 init = [tf.global_variables_initializer()]
 restore_g = [v for v in tf.global_variables() if 'opt' not in v.name
              and 'beta1_power' not in v.name
