@@ -46,7 +46,7 @@ np.random.shuffle(index)
 index = index[:args.batch_size]
 index.sort()
 with h5.File(args.h5root, 'r') as f:
-    img = f['imgs'][index].transpose([0, 2, 3, 1]) / 255.0
+    img = f['imgs'][list(index)].transpose([0, 2, 3, 1]) / 255.0
 x = tf.placeholder(tf.float32, [args.batch_size, 128, 128, 3])
 w = Encoder(x, training=True)
 fake = Generator(w, y=None, is_training=True)
