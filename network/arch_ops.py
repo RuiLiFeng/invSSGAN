@@ -199,8 +199,8 @@ def _accumulated_moments_for_inference(mean, variance, is_training):
                              "use_moving_averages"])
 def standardize_batch(inputs,
                       is_training,
-                      decay=0.999,
-                      epsilon=1e-3,
+                      decay=0.9,
+                      epsilon=1e-5,
                       data_format="NHWC",
                       use_moving_averages=False,
                       use_cross_replica_mean=None):
