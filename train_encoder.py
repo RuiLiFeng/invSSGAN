@@ -48,6 +48,8 @@ args = vars(parser.parse_args())
 
 model = import_module('training.' + args['model'])
 
+tf.config.optimizer.set_jit(True)
+
 config = Config()
 config.set(**args)
 config.make_task_dir()
