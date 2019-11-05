@@ -29,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="54" column="21" lean-forward="true" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+            <state relative-caret-position="391">
+              <caret line="72" column="33" selection-start-line="72" selection-end-line="73" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -55,6 +55,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="312">
               <caret line="244" column="17" selection-start-line="244" selection-start-column="17" selection-end-line="244" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/network/resnet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="554">
+              <caret line="457" lean-forward="true" selection-start-line="457" selection-end-line="457" />
+              <folding>
+                <element signature="e#1280#1318#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -271,16 +283,15 @@
       <workItem from="1572393282549" duration="71255000" />
       <workItem from="1572775616080" duration="133000" />
       <workItem from="1572775756224" duration="1478000" />
-      <workItem from="1572866292723" duration="24493000" />
+      <workItem from="1572866292723" duration="24750000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98141000" />
+    <option name="totallyTimeSpent" value="98398000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1609808" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -296,7 +307,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.31019524" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.03253796" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.35683298" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.28091106" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -388,16 +399,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="210" column="35" lean-forward="true" selection-start-line="210" selection-start-column="35" selection-end-line="210" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/network/resnet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="459" column="18" selection-start-line="459" selection-start-column="18" selection-end-line="459" selection-end-column="18" />
-          <folding>
-            <element signature="e#1280#1318#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -543,13 +544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/network/resnet_biggan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="244" column="17" selection-start-line="244" selection-start-column="17" selection-end-line="244" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/network/arch_ops.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -557,10 +551,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/network/resnet_biggan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="244" column="17" selection-start-line="244" selection-start-column="17" selection-end-line="244" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/network/resnet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="457" lean-forward="true" selection-start-line="457" selection-end-line="457" />
+          <folding>
+            <element signature="e#1280#1318#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="54" column="21" lean-forward="true" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
+        <state relative-caret-position="391">
+          <caret line="72" column="33" selection-start-line="72" selection-end-line="73" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
