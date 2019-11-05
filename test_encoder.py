@@ -25,13 +25,15 @@ parser.add_argument('--restore_d_dir', type=str, default='/ghome/fengrl/disc_ckp
                     help='seed for np')
 parser.add_argument('--restore_e_dir', type=str, default='/gdata1/fengrl/SSGAN/00036-invSSGAN/vgg.ckpt-12000',
                     help='seed for np')
+parser.add_argument('--encoder_name', type=str, default='vae-16000',
+                    help='seed for np')
 parser.add_argument('--save_name', type=str, default='vae-16000',
                     help='seed for np')
 
 
 args = parser.parse_args()
 
-Encoder = ImagenetModel(resnet_size=50, num_classes=120, name='Encoder')
+Encoder = ImagenetModel(resnet_size=50, num_classes=120, name=args.encoder_name)
 Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                     embed_z=False,
                                     batch_norm_fn=arch_ops.self_modulated_batch_norm,
