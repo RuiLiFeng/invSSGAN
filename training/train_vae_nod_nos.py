@@ -76,7 +76,7 @@ def training_loop(config: Config):
                                             embed_z=False,
                                             batch_norm_fn=arch_ops.self_modulated_batch_norm,
                                             spectral_norm=True)
-        learning_rate = tf.train.exponential_decay(config.lr, global_step, 100000,
+        learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
                                                    0.8, staircase=False)
         E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta1=config.beta1)
         G_embed_np = np.load('/ghome/fengrl/ssgan/invSSGAN/G_embed.npy')
@@ -87,9 +87,9 @@ def training_loop(config: Config):
             sample_z = tf.random.normal([config.batch_size // config.gpu_nums, config.dim_z],
                                         stddev=1.0, name='sample_z')
             sample_w = tf.matmul(sample_z, G_embed, name='sample_w')
-            sample_img = Generator(sample_w, y=None, is_training=True)
+            sample_img = Generator(sample_w, y=None, is_training=False)
             w = Encoder(image, training=True)
-            x = Generator(w, y=None, is_training=True)
+            x = Generator(w, y=None, is_training=False)
             ww_ = Encoder(sample_img, training=True)
             with tf.variable_scope('recon_loss'):
                 recon_loss_pixel = tf.reduce_mean(tf.square(x - image))

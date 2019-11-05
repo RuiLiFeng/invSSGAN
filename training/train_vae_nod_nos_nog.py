@@ -73,14 +73,14 @@ def training_loop(config: Config):
                                             embed_z=False,
                                             batch_norm_fn=arch_ops.self_modulated_batch_norm,
                                             spectral_norm=True)
-        learning_rate = tf.train.exponential_decay(config.lr, global_step, 40000,
+        learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
                                                    0.8, staircase=False)
         E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta1=config.beta1)
         print("Building tensorflow graph...")
 
         def train_step(image):
             w = Encoder(image, training=True)
-            x = Generator(w, y=None, is_training=True)
+            x = Generator(w, y=None, is_training=False)
             with tf.variable_scope('recon_loss'):
                 e_loss = tf.reduce_mean(tf.square(x - image))
 
