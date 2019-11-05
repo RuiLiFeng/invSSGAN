@@ -23,11 +23,13 @@ parser.add_argument('--restore_g_dir', type=str, default='/ghome/fengrl/gen_ckpt
                     help='seed for np')
 parser.add_argument('--restore_d_dir', type=str, default='/ghome/fengrl/disc_ckpt/disc-0',
                     help='seed for np')
-parser.add_argument('--restore_e_dir', type=str, default='/gdata1/fengrl/SSGAN/00036-invSSGAN/vgg.ckpt-12000',
+parser.add_argument('--restore_e_dir', type=str, default='/gdata1/fengrl/SSGAN/00042-train_vgg/vgg.ckpt-48000',
                     help='seed for np')
-parser.add_argument('--encoder_name', type=str, default='vae-16000',
+parser.add_argument('--encoder_name', type=str, default='vae_alter',
                     help='seed for np')
 parser.add_argument('--save_name', type=str, default='vae-16000',
+                    help='seed for np')
+parser.add_argument('--embed_dir', type=str, default='/ghome/fengrl/ssgan/invSSGAN/G_embed.npy',
                     help='seed for np')
 
 
@@ -38,7 +40,7 @@ Generator = resnet_biggan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                     embed_z=False,
                                     batch_norm_fn=arch_ops.self_modulated_batch_norm,
                                     spectral_norm=True)
-G_embed_np = np.load('/ghome/fengrl/ssgan/invSSGAN/G_embed.npy')
+G_embed_np = np.load(args.embed_dir)
 G_embed = tf.convert_to_tensor(G_embed_np, dtype=tf.float32, name='G_embed')
 
 z = tf.random.normal([args.batch_size, 120], stddev=1.0, name='z')

@@ -89,7 +89,7 @@ def training_loop(config: Config):
             sample_w = tf.matmul(sample_z, G_embed, name='sample_w')
             sample_img = Generator(sample_w, y=None, is_training=False)
             w = Encoder(image, training=True)
-            x = Generator(w, y=None, is_training=False)
+            x = Generator(w, y=None, is_training=True)
             ww_ = Encoder(sample_img, training=True)
             with tf.variable_scope('recon_loss'):
                 recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
@@ -107,7 +107,7 @@ def training_loop(config: Config):
         with tf.init_scope():
             # def eval_fn():
             fixed_w = Encoder(fixed_x, training=False)
-            fixed_sample = Generator(z=fixed_w, y=None, is_training=False)
+            fixed_sample = Generator(z=fixed_w, y=None, is_training=True)
                 # return fixed_sample
             # fixed_sample = strategy.experimental_run_v2(eval_fn, ())
 

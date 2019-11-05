@@ -44,7 +44,7 @@ from tensorflow.python.training import moving_averages  # pylint: disable=g-dire
 
 
 @gin.configurable("weights")
-def weight_initializer(initializer=consts.NORMAL_INIT, stddev=0.02):
+def weight_initializer(initializer=consts.ORTHOGONAL_INIT, stddev=0.02):
   """Returns the initializer for the given name.
 
   Args:
@@ -199,8 +199,8 @@ def _accumulated_moments_for_inference(mean, variance, is_training):
                              "use_moving_averages"])
 def standardize_batch(inputs,
                       is_training,
-                      decay=0.9,
-                      epsilon=1e-5,
+                      decay=0.999,
+                      epsilon=1e-6,
                       data_format="NHWC",
                       use_moving_averages=False,
                       use_cross_replica_mean=None):

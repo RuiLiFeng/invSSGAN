@@ -114,7 +114,7 @@ def training_loop(config: Config):
         with tf.init_scope():
             # def eval_fn():
             fixed_w = Encoder(fixed_x, training=False)
-            fixed_sample = Generator(z=fixed_w, y=None, is_training=False)
+            fixed_sample = Generator(z=fixed_w, y=None, is_training=True)
                 # return fixed_sample
             # fixed_sample = strategy.experimental_run_v2(eval_fn, ())
 

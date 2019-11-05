@@ -80,7 +80,7 @@ def training_loop(config: Config):
 
         def train_step(image):
             w = Encoder(image, training=True)
-            x = Generator(w, y=None, is_training=False)
+            x = Generator(w, y=None, is_training=True)
             with tf.variable_scope('recon_loss'):
                 e_loss = tf.reduce_mean(tf.square(x - image))
 
@@ -94,7 +94,7 @@ def training_loop(config: Config):
         print("Building eval module...")
         with tf.init_scope():
             fixed_w = Encoder(fixed_x, training=False)
-            fixed_sample = Generator(z=fixed_w, y=None, is_training=False)
+            fixed_sample = Generator(z=fixed_w, y=None, is_training=True)
 
         print('Building init module...')
         with tf.init_scope():
