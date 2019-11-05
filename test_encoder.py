@@ -50,9 +50,9 @@ index.sort()
 with h5.File(args.h5root, 'r') as f:
     img = f['imgs'][list(index)].transpose([0, 2, 3, 1]) / 255.0
 x = tf.placeholder(tf.float32, [args.batch_size, 128, 128, 3])
-w = Encoder(x, training=False)
+w = Encoder(x, training=True)
 fake = Generator(w, y=None, is_training=False)
-fake_ss = Generator(wz, y=None, is_training=True)
+fake_ss = Generator(wz, y=None, is_training=False)
 init = [tf.global_variables_initializer()]
 restore_g = [v for v in tf.global_variables() if 'opt' not in v.name
              and 'beta1_power' not in v.name
