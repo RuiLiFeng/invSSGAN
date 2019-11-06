@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/network/arch_ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/network/arch_ops.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/train_vae_nod.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/train_vae_nod.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/train_vae_nod_nos.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/train_vae_nod_nos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training/train_vae_nod_nos_nog.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/train_vae_nod_nos_nog.py" afterDir="false" />
-    </list>
+    <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,11 +10,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1957">
-              <caret line="61" column="44" lean-forward="true" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
+            <state relative-caret-position="553">
+              <caret line="31" column="96" selection-start-line="31" selection-start-column="96" selection-end-line="31" selection-end-column="96" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -28,23 +22,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos_nog.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/training/train_vae_nod.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1332">
-              <caret line="116" column="72" selection-start-line="116" selection-start-column="72" selection-end-line="116" selection-end-column="72" />
+            <state relative-caret-position="252">
+              <caret line="70" column="82" lean-forward="true" selection-start-line="70" selection-start-column="82" selection-end-line="70" selection-end-column="82" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -67,10 +49,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
+            <state relative-caret-position="1080">
               <caret line="72" column="65" lean-forward="true" selection-start-line="72" selection-start-column="65" selection-end-line="72" selection-end-column="65" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/train_encoder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="52" column="17" lean-forward="true" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -154,12 +148,12 @@
         <option value="$PROJECT_DIR$/utils/np_dataset.py" />
         <option value="$PROJECT_DIR$/training/train_test.py" />
         <option value="$PROJECT_DIR$/training/train_vgg.py" />
-        <option value="$PROJECT_DIR$/train_encoder.py" />
         <option value="$PROJECT_DIR$/test_encoder.py" />
         <option value="$PROJECT_DIR$/network/arch_ops.py" />
         <option value="$PROJECT_DIR$/training/train_vae_nod_nos_nog.py" />
         <option value="$PROJECT_DIR$/training/train_vae_nod_nos.py" />
         <option value="$PROJECT_DIR$/training/train_vae_nod.py" />
+        <option value="$PROJECT_DIR$/train_encoder.py" />
       </list>
     </option>
   </component>
@@ -259,15 +253,16 @@
       <workItem from="1572393282549" duration="71255000" />
       <workItem from="1572775616080" duration="133000" />
       <workItem from="1572775756224" duration="1478000" />
-      <workItem from="1572866292723" duration="30788000" />
+      <workItem from="1572866292723" duration="32822000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104436000" />
+    <option name="totallyTimeSpent" value="106470000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1609808" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -283,7 +278,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.20607375" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.19088937" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.03253796" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.28091106" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -433,16 +428,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train_encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="48" column="39" lean-forward="true" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/np_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -521,10 +506,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_encoder.py">
+    <entry file="file://$PROJECT_DIR$/train_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1957">
-          <caret line="61" column="44" lean-forward="true" selection-start-line="61" selection-start-column="44" selection-end-line="61" selection-end-column="44" />
+        <state relative-caret-position="442">
+          <caret line="52" column="17" lean-forward="true" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
@@ -533,8 +518,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/training/train_vae_nod.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1332">
-          <caret line="116" column="72" selection-start-line="116" selection-start-column="72" selection-end-line="116" selection-end-column="72" />
+        <state relative-caret-position="1296">
+          <caret line="94" column="45" lean-forward="true" selection-start-line="94" selection-start-column="45" selection-end-line="94" selection-end-column="45" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -543,7 +528,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
+        <state relative-caret-position="1080">
           <caret line="72" column="65" lean-forward="true" selection-start-line="72" selection-start-column="65" selection-end-line="72" selection-end-column="65" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -553,10 +538,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos_nog.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="252">
+          <caret line="70" column="82" lean-forward="true" selection-start-line="70" selection-start-column="82" selection-end-line="70" selection-end-column="82" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="31" column="96" selection-start-line="31" selection-start-column="96" selection-end-line="31" selection-end-column="96" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
