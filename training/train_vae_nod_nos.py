@@ -87,7 +87,7 @@ def training_loop(config: Config):
             sample_z = tf.random.normal([config.batch_size // config.gpu_nums, config.dim_z],
                                         stddev=1.0, name='sample_z')
             sample_w = tf.matmul(sample_z, G_embed, name='sample_w')
-            sample_img = Generator(sample_w, y=None, is_training=False)
+            sample_img = Generator(sample_w, y=None, is_training=True)
             w = Encoder(image, training=True)
             x = Generator(w, y=None, is_training=True)
             ww_ = Encoder(sample_img, training=True)
