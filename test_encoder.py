@@ -55,9 +55,15 @@ x = tf.placeholder(tf.float32, [args.batch_size, 128, 128, 3])
 w = Encoder(x, training=True)
 fake_ = Generator(w, y=None, is_training=True)
 fake_ss_ = Generator(wz, y=None, is_training=True)
+fake_ss_w = Encoder(fake_ss_, training=True)
+fake_final_ = Generator(fake_ss_w, None, is_training=True)
+
 with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
     fake = tf.identity(fake_)
+with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
     fake_ss = tf.identity(fake_ss_)
+with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
+    fake_final = tf.identity(fake_final_)
 
 
 init = [tf.global_variables_initializer()]
@@ -73,8 +79,9 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
     print("Restore generator...")
     saver_g.restore(sess, args.restore_g_dir)
     saver_e.restore(sess, args.restore_e_dir)
-    fake_img, fake_ss_img = sess.run([fake, fake_ss], {x: img})
+    fake_img, fake_ss_img, fake_final_img = sess.run([fake, fake_ss, fake_final], {x: img})
     save_image_grid(img, args.save_output_dir + '/' + args.save_name + 'reals_imagenet.png')
     save_image_grid(fake_img, args.save_output_dir + '/' + args.save_name + 'fakes_imagenet.png')
     save_image_grid(fake_ss_img, args.save_output_dir + '/' + args.save_name + 'fakes_ss.png')
+    save_image_grid(fake_final_img, args.save_output_dir + '/' + args.save_name + 'fakes_final.png')
     print('Done! See outputs in %s' % (args.save_output_dir + '/' + args.save_name))
