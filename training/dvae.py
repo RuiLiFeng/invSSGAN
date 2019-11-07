@@ -112,7 +112,7 @@ def training_loop(config: Config):
         D_embed = dense(120, True, name='embed_d', scope='Embed_D')
         # learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
         #                                            0.8, staircase=False)
-        learning_rate = config.lr
+        learning_rate = tf.convert_to_tensor(config.lr, dtype=tf.float32)
         G_solver = tf.train.AdamOptimizer(learning_rate=learning_rate / 2, name='g_opt', beta1=0.0, beta2=config.beta2)
         D_solver = tf.train.AdamOptimizer(learning_rate=learning_rate * 2, name='d_opt', beta1=0.0, beta2=config.beta2)
         print("Building tensorflow graph...")
