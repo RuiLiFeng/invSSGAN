@@ -53,10 +53,10 @@ with h5.File(args.h5root, 'r') as f:
     img = f['imgs'][list(index)].transpose([0, 2, 3, 1]) / 255.0
 x = tf.placeholder(tf.float32, [args.batch_size, 128, 128, 3])
 w = Encoder(x, training=True)
-fake_ = Generator(w, y=None, is_training=False)
-fake_ss_ = Generator(wz, y=None, is_training=False)
+fake_ = Generator(w, y=None, is_training=True)
+fake_ss_ = Generator(wz, y=None, is_training=True)
 fake_ss_w = Encoder(fake_ss_, training=True)
-fake_final_ = Generator(fake_ss_w, None, is_training=False)
+fake_final_ = Generator(fake_ss_w, None, is_training=True)
 
 with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
     fake = tf.identity(fake_)
