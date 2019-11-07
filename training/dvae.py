@@ -86,6 +86,10 @@ class dense(object):
             x = self.apply(x)
         return x
 
+    @property
+    def trainable_variables(self):
+        return [var for var in tf.trainable_variables() if self.scope in var.name]
+
 
 def training_loop(config: Config):
     timer = Timer()
@@ -110,11 +114,12 @@ def training_loop(config: Config):
         # Despite Z_embed is out of Generator, it is viewed as part of Generator
         Z_embed = dense(120, False, name='embed_z', scope=Generator.name)
         D_embed = dense(120, True, name='embed_d', scope='Embed_D')
-        # learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
-        #                                            0.8, staircase=False)
-        learning_rate = tf.convert_to_tensor(config.lr, dtype=tf.float32)
-        G_solver = tf.train.AdamOptimizer(learning_rate=learning_rate / 2, name='g_opt', beta1=0.0, beta2=config.beta2)
-        D_solver = tf.train.AdamOptimizer(learning_rate=learning_rate * 2, name='d_opt', beta1=0.0, beta2=config.beta2)
+        learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
+                                                   0.8, staircase=False)
+        # learning_rate = tf.convert_to_tensor(config.lr, dtype=tf.float32)
+        G_solver = tf.train.AdamOptimizer(learning_rate=config.lr / 2, name='g_opt', beta1=0.0, beta2=config.beta2)
+        D_solver = tf.train.AdamOptimizer(learning_rate=config.lr * 2, name='d_opt', beta1=0.0, beta2=config.beta2)
+        Embed_solver = tf.train.AdamOptimizer(learning_rate=learning_rate * 5, name='d_opt', beta1=0.0, beta2=config.beta2)
         print("Building tensorflow graph...")
 
         def train_step(image, training_G):
@@ -148,7 +153,8 @@ def training_loop(config: Config):
                 update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
                 with tf.control_dependencies([add_global] + update_ops):
                     D_opt = D_solver.minimize(d_final_loss, var_list=Generator.trainable_variables)
-                    with tf.control_dependencies([D_opt]):
+                    Embed_opt = Embed_solver.minimize(d_final_loss, var_list=D_embed.trainable_variables)
+                    with tf.control_dependencies([D_opt, Embed_opt]):
                         return tf.identity(d_final_loss), tf.identity(recon_loss_pixel)
         g_final_loss, s_loss = compute_loss(train_step, dataset.get_next(), strategy, True)
         d_final_loss, r_loss = compute_loss(train_step, dataset.get_next(), strategy, False)
