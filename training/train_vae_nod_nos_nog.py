@@ -75,7 +75,7 @@ def training_loop(config: Config):
                                             spectral_norm=True)
         learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
                                                    0.8, staircase=False)
-        E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta1=config.beta1)
+        E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta2=config.beta2)
         print("Building tensorflow graph...")
 
         def train_step(image):

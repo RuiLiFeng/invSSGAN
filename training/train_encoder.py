@@ -83,7 +83,7 @@ def training_loop(config: Config):
         Discriminator = resnet_biggan.Discriminator(spectral_norm=True, project_y=False)
         learning_rate = tf.train.exponential_decay(0.0001, global_step, 150000 / config.gpu_nums,
                                                    0.8, staircase=False)
-        E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta1=config.beta1)
+        E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta2=config.beta2)
         # D_solver = tf.train.AdamOptimizer(learning_rate=learning_rate * 5, name='d_opt', beta1=config.beta1)
 
         print("Building tensorflow graph...")

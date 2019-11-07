@@ -13,6 +13,8 @@ parser.add_argument('--resume', action='store_true', default=False,
                     help='seed for np')
 parser.add_argument('--load_num', type=int, default=None,
                     help='seed for np')
+parser.add_argument('--disc_iter', type=int, default=2,
+                    help='seed for np')
 parser.add_argument('--batch_size', type=int, default=1024,
                     help='batch size for sample')
 parser.add_argument('--seed', type=int, default=23,
@@ -28,6 +30,12 @@ parser.add_argument('--r_loss_scale', type=float, default=0.4,
 parser.add_argument('--lr', type=float, default=0.0001,
                     help='seed for np')
 parser.add_argument('--g_loss_scale', type=float, default=0.03,
+                    help='seed for np')
+parser.add_argument('--s_loss_scale', type=float, default=0.01,
+                    help='seed for np')
+parser.add_argument('--alpha', type=float, default=0.02,
+                    help='seed for np')
+parser.add_argument('--beta', type=float, default=0.1,
                     help='seed for np')
 parser.add_argument('--model_dir_root', type=str, default='/gdata1/fengrl/SSGAN',
                     help='seed for np')

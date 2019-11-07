@@ -116,7 +116,7 @@ class Config(object):
                  save_per_steps=2000,
                  disc_iter=2,
                  seed=547,
-                 beta1=0.9,
+                 beta2=0.999,
                  g_loss_scale=0.1,
                  ema_decay=0.999,
                  ema_start_step=0,
@@ -130,7 +130,7 @@ class Config(object):
         self.batch_size = batch_size
         self.total_step = total_step
         self.disc_iter = disc_iter
-        self.beta1 = beta1
+        self.beta2 = beta2
         self.g_loss_scale = g_loss_scale
         self.model_dir_root = model_dir_root
         self.model_dir = None
