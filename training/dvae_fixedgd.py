@@ -121,7 +121,7 @@ def training_loop(config: Config):
         Embed_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='d_opt', beta1=0.0, beta2=config.beta2)
         print("Building tensorflow graph...")
 
-        def train_step(image, training_G):
+        def train_step(image):
             z = tf.random.normal([config.batch_size // config.gpu_nums, config.dim_z],
                                  stddev=1.0, name='sample_z')
             w = Z_embed(z)
