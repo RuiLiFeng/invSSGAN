@@ -88,7 +88,7 @@ def training_loop(config: Config):
         print("Constructing networks...")
         fixed_x = tf.placeholder(tf.float32, [None, 128, 128, 3])
         Encoder = ImagenetModel(resnet_size=50, num_classes=None, name='vgg_alter')
-        Assgin_net = assgin_net(x0_ch=512+256, scope=Encoder.name)
+        Assgin_net = assgin_net(x0_ch=512+256, scope='Assgin')
         Generator = resnet_biggan_ssgan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                                   embed_z=False,
                                                   batch_norm_fn=arch_ops.self_modulated_batch_norm,
@@ -113,14 +113,14 @@ def training_loop(config: Config):
             x, _ = Generator(w, y=None, is_training=True)
             with tf.variable_scope('recon_loss'):
                 recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
-                sample_loss = tf.reduce_mean(tf.square(ww_ - sample_w_out)) / (
-                        tf.reduce_mean(tf.square(sample_w_out)) + EPS)
+                sample_loss = tf.reduce_mean(tf.square(ww_ - sample_w_out))
                 e_loss = recon_loss_pixel + sample_loss * config.s_loss_scale
 
             add_global = global_step.assign_add(1)
             update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
             with tf.control_dependencies([add_global] + update_ops):
-                E_opt = E_solver.minimize(e_loss, var_list=Encoder.trainable_variables)
+                E_opt = E_solver.minimize(e_loss,
+                                          var_list=Encoder.trainable_variables + Assgin_net.trainable_variables)
                 with tf.control_dependencies([E_opt]):
                     return tf.identity(e_loss), tf.identity(recon_loss_pixel), tf.identity(sample_loss)
         e_loss, r_loss, s_loss = compute_loss(train_step, dataset.get_next(), strategy)
@@ -139,6 +139,7 @@ def training_loop(config: Config):
                          and 'generator' in v.name]
             saver_g = tf.train.Saver(restore_g, restore_sequentially=True)
             saver_e = tf.train.Saver(Encoder.trainable_variables, restore_sequentially=True)
+            saver_assgin = tf.train.Saver(Assgin_net.trainable_variables, restore_sequentially=True)
         print("Start training...")
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
             sess.run(init)
@@ -146,6 +147,8 @@ def training_loop(config: Config):
             saver_g.restore(sess, config.restore_g_dir)
             if config.resume:
                 saver_e.restore(sess, config.restore_v_dir)
+                if config.resume_assgin:
+                    saver_assgin.restore(sess, config.restore_assgin_dir)
             save_image_grid(fixed_img, filename=config.model_dir + '/reals.png')
             timer.update()
 
@@ -168,6 +171,8 @@ def training_loop(config: Config):
                 if iteration % config.save_per_steps == 0:
                     saver_e.save(sess, save_path=config.model_dir + '/en.ckpt',
                                  global_step=iteration, write_meta_graph=False)
+                    saver_assgin.save(sess, save_path=config.model_dir + '/assgin.ckpt',
+                                      global_step=iteration, write_meta_graph=False)
 
 
 def fp32(*values):
@@ -187,7 +192,8 @@ class assgin_net(object):
     def apply(self, x):
         x0 = x[:, :self.x0_ch]
         x_per_block = tf.split(x[:, self.x0_ch:], 5, axis=1)
-        x0 = arch_ops.linear(x0, 16 * 1536, scope='x0_embed', use_sn=True)
+        x0 = arch_ops.linear(x0, 128, scope='x0_embed_0', use_sn=True)
+        x0 = arch_ops.linear(x0, 16 * 1536, scope='x0_embed_1', use_sn=True)
         for block_idx in range(5):
             x_per_block[block_idx] = arch_ops.linear(x_per_block[block_idx], 20, scope='x%d_embed' % (block_idx + 1),
                                                      use_sn=True)

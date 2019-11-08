@@ -11,6 +11,8 @@ parser.add_argument('--load_in_mem', action='store_true', default=False,
                     help='seed for np')
 parser.add_argument('--resume', action='store_true', default=False,
                     help='seed for np')
+parser.add_argument('--resume_assgin', action='store_true', default=False,
+                    help='seed for np')
 parser.add_argument('--load_num', type=int, default=None,
                     help='seed for np')
 parser.add_argument('--disc_iter', type=int, default=2,
@@ -46,6 +48,8 @@ parser.add_argument('--finalize', action='store_true', default=False,
 parser.add_argument('--restore_g_dir', type=str, default='/ghome/fengrl/gen_ckpt/gen-0',
                     help='seed for np')
 parser.add_argument('--restore_d_dir', type=str, default='/ghome/fengrl/disc_ckpt/disc-0',
+                    help='seed for np')
+parser.add_argument('--restore_assgin_dir', type=str, default='/ghome/fengrl/disc_ckpt/disc-0',
                     help='seed for np')
 parser.add_argument('--restore_v_dir', type=str, default='/gdata1/fengrl/SSGAN/00036-invSSGAN/vgg.ckpt-12000',
                     help='seed for np')
