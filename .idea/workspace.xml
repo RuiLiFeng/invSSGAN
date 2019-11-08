@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_encoder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/training/train_vae_nod_nos_wider.py" beforeDir="false" afterPath="$PROJECT_DIR$/training/train_vae_nod_nos_wider.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,8 +71,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos_wider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2902">
-              <caret line="165" column="58" lean-forward="true" selection-start-line="165" selection-start-column="58" selection-end-line="165" selection-end-column="58" />
+            <state relative-caret-position="274">
+              <caret line="116" column="108" selection-start-line="116" selection-start-column="108" selection-end-line="116" selection-end-column="108" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -138,8 +137,8 @@
         <option value="$PROJECT_DIR$/network/arch_ops.py" />
         <option value="$PROJECT_DIR$/training/train_vae_nod_nos.py" />
         <option value="$PROJECT_DIR$/network/resnet_biggan_ssgan.py" />
-        <option value="$PROJECT_DIR$/training/train_vae_nod_nos_wider.py" />
         <option value="$PROJECT_DIR$/train_encoder.py" />
+        <option value="$PROJECT_DIR$/training/train_vae_nod_nos_wider.py" />
       </list>
     </option>
   </component>
@@ -221,13 +220,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47816000" />
+    <option name="totallyTimeSpent" value="49289000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17537314" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17537314" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -241,7 +240,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.20607375" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.24295011" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.24295011" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.2537961" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -535,8 +534,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos_wider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2902">
-          <caret line="165" column="58" lean-forward="true" selection-start-line="165" selection-start-column="58" selection-end-line="165" selection-end-column="58" />
+        <state relative-caret-position="274">
+          <caret line="116" column="108" selection-start-line="116" selection-start-column="108" selection-end-line="116" selection-end-column="108" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>

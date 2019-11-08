@@ -113,7 +113,8 @@ def training_loop(config: Config):
             x, _ = Generator(w, y=None, is_training=True)
             with tf.variable_scope('recon_loss'):
                 recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
-                sample_loss = tf.reduce_mean(tf.square(ww_ - sample_w_out))
+                sample_loss = tf.reduce_mean(tf.square(ww_[:, :1536*16] - sample_w_out[:, :1536*16])) * 0.7
+                sample_loss += tf.reduce_mean(tf.square(ww_[:, 1536*16:] - sample_w_out[:, 1536*16:])) * 0.3
                 e_loss = recon_loss_pixel + sample_loss * config.s_loss_scale
 
             add_global = global_step.assign_add(1)
