@@ -178,6 +178,7 @@ def training_loop(config: Config):
                          and 'discriminator' in v.name]
             saver_g = tf.train.Saver(restore_g, restore_sequentially=True)
             saver_d = tf.train.Saver(restore_d, restore_sequentially=True)
+            saver_embed = tf.train.Saver(D_embed.trainable_variables)
         print("Start training...")
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
             sess.run(init)
@@ -209,6 +210,8 @@ def training_loop(config: Config):
                                  global_step=iteration, write_meta_graph=False)
                     saver_d.save(sess, save_path=config.model_dir + '/disc.ckpt',
                                  global_step=iteration, write_meta_graph=False)
+                    saver_embed.save(sess, save_path=config.model_dir + '/embed.ckpt',
+                                     global_step=iteration, write_meta_graph=False)
 
 
 def fp32(*values):

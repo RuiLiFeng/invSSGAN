@@ -10,6 +10,9 @@ from utils import np_dataset as npdt
 import numpy as np
 
 
+EPS = 1e-15
+
+
 class np_dataset(object):
     def __init__(self, root='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5', batch_size=256):
         print('Loading data root %s into memory...' % root)
@@ -93,8 +96,8 @@ def training_loop(config: Config):
             w_ = Encoder(x, training=True)
             ww_ = Encoder(sample_img, training=True)
             with tf.variable_scope('recon_loss'):
-                recon_loss_pixel = tf.reduce_mean(tf.square(w_ - w))
-                sample_loss = tf.reduce_mean(tf.square(ww_ - sample_w))
+                recon_loss_pixel = tf.reduce_mean(tf.square(w_ - w)) / (tf.reduce_mean(tf.square(w)) + EPS)
+                sample_loss = tf.reduce_mean(tf.square(ww_ - sample_w)) / (tf.reduce_mean(tf.square(sample_w)) + EPS)
                 e_loss = recon_loss_pixel + sample_loss * config.s_loss_scale
 
             add_global = global_step.assign_add(1)
