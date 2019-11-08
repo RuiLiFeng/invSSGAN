@@ -255,7 +255,6 @@ class Generator(abstract_arch.AbstractGenerator):
         raise ValueError('z_dim must in [120, 1536*16+100], found %d' % z_dim)
 
     y_per_block = num_blocks * [y]
-    print(z0, z_per_block)
     z_out = tf.concat([z0] + z_per_block, axis=1)
 
     logging.info("[Generator] z0=%s, z_per_block=%s, y_per_block=%s",
