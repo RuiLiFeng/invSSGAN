@@ -90,11 +90,12 @@ def training_loop(config: Config):
             sample_img = Generator(sample_w, y=None, is_training=True)
             w = Encoder(image, training=True)
             x = Generator(w, y=None, is_training=True)
+            w_ = Encoder(x, training=True)
             ww_ = Encoder(sample_img, training=True)
             with tf.variable_scope('recon_loss'):
-                recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
+                recon_loss_pixel = tf.reduce_mean(tf.square(w_ - w))
                 sample_loss = tf.reduce_mean(tf.square(ww_ - sample_w))
-                e_loss = recon_loss_pixel + sample_loss * config.g_loss_scale
+                e_loss = recon_loss_pixel + sample_loss * config.s_loss_scale
 
             add_global = global_step.assign_add(1)
             update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
