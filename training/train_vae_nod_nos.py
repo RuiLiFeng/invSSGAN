@@ -53,11 +53,12 @@ def build_np_dataset(root, batch_size, gpu_nums):
 
 
 def compute_loss(train_step, data, strategy):
-    e_loss, r_loss, s_loss = strategy.experimental_run_v2(train_step, (data,))
+    e_loss, r_loss, s_loss, t_loss = strategy.experimental_run_v2(train_step, (data,))
     mean_e_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, e_loss, axis=None)
     mean_r_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, r_loss, axis=None)
     mean_s_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, s_loss, axis=None)
-    return mean_e_losses, mean_r_losses, mean_s_losses
+    mean_t_losses = strategy.reduce(tf.distribute.ReduceOp.MEAN, t_loss, axis=None)
+    return mean_e_losses, mean_r_losses, mean_s_losses,mean_t_losses
 
 
 def training_loop(config: Config):
@@ -97,16 +98,18 @@ def training_loop(config: Config):
             ww_ = Encoder(sample_img, training=True)
             with tf.variable_scope('recon_loss'):
                 recon_loss_pixel = tf.reduce_mean(tf.square(w_ - w)) / (tf.reduce_mean(tf.square(w)) + EPS)
+                trip_loss = triplet_loss(w_, w, config.triple_margin)
                 sample_loss = tf.reduce_mean(tf.square(ww_ - sample_w)) / (tf.reduce_mean(tf.square(sample_w)) + EPS)
-                e_loss = recon_loss_pixel + sample_loss * config.s_loss_scale
+                e_loss = recon_loss_pixel + sample_loss * config.s_loss_scale + trip_loss
 
             add_global = global_step.assign_add(1)
             update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
             with tf.control_dependencies([add_global] + update_ops):
                 E_opt = E_solver.minimize(e_loss, var_list=Encoder.trainable_variables)
                 with tf.control_dependencies([E_opt]):
-                    return tf.identity(e_loss), tf.identity(recon_loss_pixel), tf.identity(sample_loss)
-        e_loss, r_loss, s_loss = compute_loss(train_step, dataset.get_next(), strategy)
+                    return tf.identity(e_loss), tf.identity(recon_loss_pixel),\
+                           tf.identity(sample_loss), tf.identity(trip_loss)
+        e_loss, r_loss, s_loss, t_loss = compute_loss(train_step, dataset.get_next(), strategy)
         print("Building eval module...")
         with tf.init_scope():
             # def eval_fn():
@@ -138,13 +141,13 @@ def training_loop(config: Config):
 
             print("Start iterations...")
             for iteration in range(config.total_step):
-                e_loss_, r_loss_, s_loss_, lr_ = sess.run(
-                    [e_loss, r_loss, s_loss, learning_rate])
+                e_loss_, r_loss_, s_loss_, t_loss_, lr_ = sess.run(
+                    [e_loss, r_loss, s_loss, t_loss, learning_rate])
                 if iteration % config.print_loss_per_steps == 0:
                     timer.update()
-                    print("step %d, e_loss %f, r_loss %f, s_loss %f, "
+                    print("step %d, e_loss %f, r_loss %f, s_loss %f, t_loss %f "
                           "learning_rate % f, consuming time %s" %
-                          (iteration, e_loss_, r_loss_, s_loss_,
+                          (iteration, e_loss_, r_loss_, s_loss_, t_loss_,
                            lr_, timer.runing_time_format))
                 if iteration % config.eval_per_steps == 0:
                     timer.update()
@@ -160,3 +163,15 @@ def fp32(*values):
         values = values[0]
     values = tuple(tf.cast(v, tf.float32) for v in values)
     return values if len(values) >= 2 else values[0]
+
+
+def triplet_loss(w_, w, margin):
+    w_1 = tf.tile(tf.expand_dims(w_, 1), [1, w_.shape[0].value, 1])
+    w1 = tf.tile(tf.expand_dims(w, 0), [w.shape[0].value, 1, 1])
+
+    pairwise_dis = tf.reduce_mean(tf.square(w_1 - w1), axis=2) / (tf.reduce_mean(tf.square(w1), axis=2) + EPS)
+    p_dis = tf.diag_part(pairwise_dis)
+    p_dis = tf.tile(tf.expand_dims(p_dis, 1), [1, p_dis.shape[0].value])
+    loss = tf.reduce_mean(tf.nn.relu(p_dis - pairwise_dis + margin * (
+            tf.ones_like(p_dis) - tf.eye(p_dis.shape[0].value, p_dis.shape[1].value, dtype=p_dis.dtype))))
+    return loss
