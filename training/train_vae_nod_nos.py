@@ -14,25 +14,36 @@ EPS = 1e-15
 
 
 class np_dataset(object):
-    def __init__(self, root='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5', batch_size=256):
+    def __init__(self, root='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5', batch_size=256, load_in_mem=True):
         print('Loading data root %s into memory...' % root)
         self.root = root
-        with h5.File(root, 'r') as f:
-            self.img = f['imgs'][1:]
-            self.label = f['labels'][1:]
-        self.num_imgs = len(self.label)
+        self.load_in_mem = load_in_mem
+        self.num_imgs = len(h5.File(root, 'r')['labels']) - 1
+        if self.load_in_mem:
+            with h5.File(root, 'r') as f:
+                self.img = f['imgs'][1:]
+                self.label = f['labels'][1:]
         self.index = np.arange(self.num_imgs)
         np.random.shuffle(self.index)
         self.batch_size = batch_size // 4
 
-    def gen(self):
+    def gen_from_mem(self):
         for i in self.index:
             yield self.img[i]
+
+    def gen_from_file(self):
+        for i in self.index:
+            with h5.File(self.root, 'r') as f:
+                yield f['imgs'][i + 1]
 
     def fixed_sample(self):
         index = np.random.randint(0, self.num_imgs, self.batch_size)
         index.sort()
-        return self.img[list(index)].transpose([0, 2, 3, 1]) / 255.0
+        if self.load_in_mem:
+            return self.img[list(index)].transpose([0, 2, 3, 1]) / 255.0
+        else:
+            with h5.File(self.root, 'r') as f:
+                return f['imgs'][list(index + 1)].transpose([0, 2, 3, 1]) / 255.0
 
     def __len__(self):
         return self.num_imgs
@@ -42,12 +53,13 @@ def parser_fn(img):
     return tf.cast(tf.transpose(img, [1, 2, 0]), tf.float32) / 255.0
 
 
-def build_np_dataset(root, batch_size, gpu_nums):
-    h5_dset = np_dataset(root, batch_size)
+def build_np_dataset(root, batch_size, gpu_nums, load_in_mem=True):
+    h5_dset = np_dataset(root, batch_size, load_in_mem)
+    gen = h5_dset.gen_from_mem if h5_dset.load_in_mem else h5_dset.gen_from_file
     fixed_img = h5_dset.fixed_sample()
-    dset = tf.data.Dataset.from_generator(h5_dset.gen, tf.float32, output_shapes=[3, 128, 128])
+    dset = tf.data.Dataset.from_generator(gen, tf.float32, output_shapes=[3, 128, 128])
     print('Making tensorflow dataset with length %d' % len(h5_dset))
-    dset = dset.map(map_func=parser_fn, num_parallel_calls=3 * gpu_nums).shuffle(10000).batch(
+    dset = dset.map(map_func=parser_fn, num_parallel_calls=2 * gpu_nums).shuffle(10000).batch(
         batch_size, drop_remainder=True).repeat().prefetch(tf.contrib.data.AUTOTUNE)
     return dset, fixed_img
 
@@ -67,7 +79,8 @@ def training_loop(config: Config):
     strategy = tf.distribute.MirroredStrategy()
     print('Loading Imagenet2012 dataset...')
     # dataset = load_from_h5(root=config.h5root, batch_size=config.batch_size)
-    dataset, fixed_img = build_np_dataset(root=config.h5root, batch_size=config.batch_size, gpu_nums=config.gpu_nums)
+    dataset, fixed_img = build_np_dataset(root=config.h5root, batch_size=config.batch_size, gpu_nums=config.gpu_nums,
+                                          load_in_mem=config.load_in_mem)
     dataset = strategy.experimental_distribute_dataset(dataset)
     dataset = dataset.make_initializable_iterator()
     with strategy.scope():
