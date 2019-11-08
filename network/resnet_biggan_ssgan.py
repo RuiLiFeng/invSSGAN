@@ -241,7 +241,7 @@ class Generator(abstract_arch.AbstractGenerator):
     in_channels, out_channels = self._get_in_out_channels()
     num_blocks = len(in_channels)
     if z_dim == 1536 * 16 + 100:
-        z0 = z[:, 1536 * 16]
+        z0 = z[:, :1536 * 16]
         z_per_block = tf.split(z[:, 1536 * 16:], num_blocks, axis=1)
     elif z_dim == 120:
         z_per_block = tf.split(z, num_blocks + 1, axis=1)

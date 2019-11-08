@@ -110,7 +110,6 @@ def training_loop(config: Config):
 
             w = Encoder(image, training=True)
             w = Assgin_net(w)
-            print(w)
             x, _ = Generator(w, y=None, is_training=True)
             with tf.variable_scope('recon_loss'):
                 recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
