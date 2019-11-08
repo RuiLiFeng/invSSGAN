@@ -240,36 +240,30 @@ class Generator(abstract_arch.AbstractGenerator):
 
     in_channels, out_channels = self._get_in_out_channels()
     num_blocks = len(in_channels)
-
-    if self._embed_z:
-      z = ops.linear(z, z_dim, scope="embed_z", use_sn=False,
-                     use_bias=self._embed_bias)
-    if self._embed_y:
-      y = ops.linear(y, self._embed_y_dim, scope="embed_y", use_sn=False,
-                     use_bias=self._embed_bias)
-    y_per_block = num_blocks * [y]
-    if self._hierarchical_z:
-      z_per_block = tf.split(z, num_blocks + 1, axis=1)
-      z0, z_per_block = z_per_block[0], z_per_block[1:]
-      if y is not None:
-        y_per_block = [tf.concat([zi, y], 1) for zi in z_per_block]
+    if z_dim == 1536 * 16 + 100:
+        z0 = z[:, 1536 * 16]
+        z_per_block = tf.split(z[:, 1536 * 16:], num_blocks, axis=1)
+    elif z_dim == 120:
+        z_per_block = tf.split(z, num_blocks + 1, axis=1)
+        z0, z_per_block = z_per_block[0], z_per_block[1:]
+        z0 = ops.linear(
+            z0,
+            in_channels[0] * seed_size * seed_size,
+            scope="fc_noise",
+            use_sn=self._spectral_norm)
     else:
-      z0 = z
-      z_per_block = num_blocks * [z]
+        raise ValueError('z_dim must in [120, 1536*16+100], found %d' % z_dim)
+
+    y_per_block = num_blocks * [y]
+    z_out = tf.concat([z0] + z_per_block, axis=1)
 
     logging.info("[Generator] z0=%s, z_per_block=%s, y_per_block=%s",
                  z0.shape, [str(shape_or_none(t)) for t in z_per_block],
                  [str(shape_or_none(t)) for t in y_per_block])
 
     # Map noise to the actual seed.
-    net = ops.linear(
-        z0,
-        in_channels[0] * seed_size * seed_size,
-        scope="fc_noise",
-        use_sn=self._spectral_norm)
-    # Reshape the seed to be a rank-4 Tensor.
     net = tf.reshape(
-        net,
+        z0,
         [-1, seed_size, seed_size, in_channels[0]],
         name="fc_reshaped")
 
@@ -299,7 +293,7 @@ class Generator(abstract_arch.AbstractGenerator):
                      use_sn=self._spectral_norm)
     logging.info("[Generator] after final processing: %s", net.shape)
     net = (tf.nn.tanh(net) + 1.0) / 2.0
-    return net
+    return net, z_out
 
 
 @gin.configurable
