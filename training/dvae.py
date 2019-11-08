@@ -15,7 +15,7 @@ class np_dataset(object):
         print('Loading data root %s into memory...' % root)
         self.root = root
         self.load_in_mem = load_in_mem
-        self.num_imgs = len(h5.File(root, 'r')['labels'])
+        self.num_imgs = len(h5.File(root, 'r')['labels']) - 1
         if self.load_in_mem:
             with h5.File(root, 'r') as f:
                 self.img = f['imgs'][1:]
@@ -56,7 +56,7 @@ def build_np_dataset(root, batch_size, gpu_nums, load_in_mem=True):
     fixed_img = h5_dset.fixed_sample()
     dset = tf.data.Dataset.from_generator(gen, tf.float32, output_shapes=[3, 128, 128])
     print('Making tensorflow dataset with length %d' % len(h5_dset))
-    dset = dset.map(map_func=parser_fn, num_parallel_calls=3 * gpu_nums).shuffle(10000).batch(
+    dset = dset.map(map_func=parser_fn, num_parallel_calls=2 * gpu_nums).shuffle(10000).batch(
         batch_size, drop_remainder=True).repeat().prefetch(tf.contrib.data.AUTOTUNE)
     return dset, fixed_img
 
