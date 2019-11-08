@@ -133,7 +133,7 @@ def training_loop(config: Config):
             real_w = D_embed(real_h)
             # x is the reconstruction of image
             x = Generator(real_w, None, True)
-            real_h_ = Discriminator(x, None, True)
+            _, _, real_h_ = Discriminator(x, None, True)
             d_loss, _, _, g_loss = loss_lib.get_losses(d_real=real_out, d_fake=fake_out, d_real_logits=real_logits,
                                                        d_fake_logits=fake_logits)
             with tf.variable_scope('recon_loss'):
