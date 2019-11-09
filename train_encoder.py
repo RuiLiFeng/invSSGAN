@@ -53,6 +53,8 @@ parser.add_argument('--restore_assgin_dir', type=str, default='/ghome/fengrl/dis
                     help='seed for np')
 parser.add_argument('--restore_v_dir', type=str, default='/gdata1/fengrl/SSGAN/00036-invSSGAN/vgg.ckpt-12000',
                     help='seed for np')
+parser.add_argument('--restore_ebn_dir', type=str, default='/gdata1/fengrl/SSGAN/00036-invSSGAN/vgg.ckpt-12000',
+                    help='seed for np')
 parser.add_argument('--task_name', type=str, default='invSSGAN',
                     help='seed for np')
 parser.add_argument('--triple_margin', type=float, default=0.1,
