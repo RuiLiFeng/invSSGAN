@@ -93,7 +93,7 @@ def training_loop(config: Config):
                                                   embed_z=False,
                                                   batch_norm_fn=arch_ops.self_modulated_batch_norm,
                                                   spectral_norm=True)
-        learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
+        learning_rate = tf.train.exponential_decay(config.lr, global_step, config.lr_decay_step,
                                                    0.8, staircase=False)
         E_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta2=config.beta2)
         G_embed_np = np.load('/ghome/fengrl/ssgan/invSSGAN/G_embed.npy')
