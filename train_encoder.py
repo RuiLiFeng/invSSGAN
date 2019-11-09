@@ -13,6 +13,8 @@ parser.add_argument('--resume', action='store_true', default=False,
                     help='seed for np')
 parser.add_argument('--resume_assgin', action='store_true', default=False,
                     help='seed for np')
+parser.add_argument('--resume_ebn', action='store_true', default=False,
+                    help='seed for np')
 parser.add_argument('--load_num', type=int, default=None,
                     help='seed for np')
 parser.add_argument('--disc_iter', type=int, default=2,
