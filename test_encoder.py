@@ -5,6 +5,7 @@ from network import SSGAN, loss_lib, penalty_lib, tfmetric, resnet_biggan, arch_
 import logging
 from network.resnet import ImagenetModel
 import h5py as h5
+import tensorflow as tf
 
 
 usage = 'Parser for all sample.'
