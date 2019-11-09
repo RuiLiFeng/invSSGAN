@@ -211,7 +211,7 @@ class BNlayer(object):
 
     def __call__(self, x, is_training, reuse=tf.AUTO_REUSE):
         with tf.variable_scope(self.scope, values=[x], reuse=reuse):
-            x = self.apply(x)
+            x = self.apply(x, is_training=True)
         return x
 
     def apply(self, x, is_training):
