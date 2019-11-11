@@ -89,7 +89,7 @@ def training_loop(config: Config):
         fixed_x = tf.placeholder(tf.float32, [None, 128, 128, 3])
         Encoder = ImagenetModel(resnet_size=50, num_classes=None, name='vgg_alter')
         Assgin_net = assgin_net(x0_ch=512+256, scope='Assgin')
-        BN_net = BNlayer(scope='Ebn')
+        BN_net = BNlayer(scope='Ebn', z0_ch=1536*16)
         Generator = resnet_biggan_ssgan.Generator(image_shape=[128, 128, 3], embed_y=False,
                                                   embed_z=False,
                                                   batch_norm_fn=arch_ops.self_modulated_batch_norm,
@@ -108,11 +108,11 @@ def training_loop(config: Config):
             sample_img, sample_w_out = Generator(sample_w, y=None, is_training=True)
             ww_ = Encoder(sample_img, training=True)
             ww_ = Assgin_net(ww_)
-            ww_[:, 16*1536:] = BN_net(ww_[:, 16*1536:], is_training=True)
+            ww_ = BN_net(ww_, is_training=True)
 
             w = Encoder(image, training=True)
             w = Assgin_net(w)
-            w[:, 16 * 1536:] = BN_net(w[:, 16 * 1536:], is_training=True)
+            w = BN_net(w, is_training=True)
             x, _ = Generator(w, y=None, is_training=True)
             with tf.variable_scope('recon_loss'):
                 recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
@@ -219,11 +219,12 @@ class assgin_net(object):
 
 
 class BNlayer(object):
-    def __init__(self, center=True, scale=True, name='batch_norm', scope='Ebn'):
+    def __init__(self, z0_ch, center=True, scale=True, name='batch_norm', scope='Ebn'):
         self.center = center
         self.scale = scale
         self.name = name
         self.scope = scope
+        self.z0_ch = z0_ch
 
     def __call__(self, x, is_training, reuse=tf.AUTO_REUSE):
         with tf.variable_scope(self.scope, values=[x], reuse=reuse):
@@ -231,7 +232,10 @@ class BNlayer(object):
         return x
 
     def apply(self, x, is_training):
-        x = arch_ops.batch_norm(x, is_training, self.center, self.scale, self.name)
+        x0 = x[:, :self.z0_ch]
+        x1 = x[:, self.z0_ch:]
+        x1 = arch_ops.batch_norm(x1, is_training, self.center, self.scale, self.name)
+        x = tf.concat([x0, x1], axis=1)
         return x
 
     @property
