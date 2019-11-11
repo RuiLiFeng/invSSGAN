@@ -124,7 +124,7 @@ def training_loop(config: Config):
             update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
             with tf.control_dependencies([add_global] + update_ops):
                 E_opt = E_solver.minimize(e_loss,
-                                          var_list=Encoder.trainable_variables + Assgin_net.trainable_variables)
+                                          var_list=Encoder.trainable_variables + Assgin_net.trainable_variables + BN_net.trainable_variables)
                 with tf.control_dependencies([E_opt]):
                     return tf.identity(e_loss), tf.identity(recon_loss_pixel), tf.identity(sample_loss)
         e_loss, r_loss, s_loss = compute_loss(train_step, dataset.get_next(), strategy)
