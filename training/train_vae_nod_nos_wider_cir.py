@@ -115,7 +115,8 @@ def training_loop(config: Config):
             w_ = Assgin_net(w_)
             with tf.variable_scope('recon_loss'):
                 recon_loss_pixel = tf.reduce_mean(tf.square(x - image))
-                recon_loss_circle = tf.reduce_mean(tf.square(w - w_))
+                recon_loss_circle = tf.reduce_mean(tf.square(w[:, :1536*16] - w_[:, :1536*16])) * 0.7
+                recon_loss_circle += tf.reduce_mean(tf.square(w[:, 1536 * 16:] - w_[:, 1536 * 16:])) * 0.3
                 sample_loss = tf.reduce_mean(tf.square(ww_[:, :1536*16] - sample_w_out[:, :1536*16])) * 0.7
                 sample_loss += tf.reduce_mean(tf.square(ww_[:, 1536*16:] - sample_w_out[:, 1536*16:])) * 0.3
                 e_loss = recon_loss_pixel + sample_loss * config.s_loss_scale + recon_loss_circle
