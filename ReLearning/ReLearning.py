@@ -54,6 +54,7 @@ def training_loop(config: Config):
                     return tf.identity(loss)
         loss_run = strategy.experimental_run_v2(train_step, dataset.get_next())
         loss = strategy.reduce(tf.distribute.ReduceOp.MEAN, loss_run, axis=None)
+        print(loss)
         print("Building eval module...")
 
         def eval_step(image, label):
