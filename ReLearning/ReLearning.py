@@ -61,7 +61,7 @@ def training_loop(config: Config):
             w = Dense(w)
             p = tf.math.argmax(w)
             p = tf.cast(p, tf.int32)
-            label = tf.one_hot(label, 1000)
+            label = tf.one_hot(label, 1000, dtype=tf.int32)
             precise = tf.reduce_mean(tf.cast(tf.equal(p, label), tf.float32))
             return precise
 
