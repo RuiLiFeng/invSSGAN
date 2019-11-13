@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/ReLearning/ReLearning.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReLearning/ReLearning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReLearning/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReLearning/datasets.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,8 +100,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ReLearning/ReLearning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="62" column="36" lean-forward="true" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
+            <state relative-caret-position="360">
+              <caret line="61" column="33" lean-forward="true" selection-start-line="61" selection-start-column="33" selection-end-line="61" selection-end-column="33" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -286,12 +285,12 @@
       <updated>1573091721018</updated>
       <workItem from="1573091743659" duration="16745000" />
       <workItem from="1573548318733" duration="11774000" />
-      <workItem from="1573627049745" duration="4684000" />
+      <workItem from="1573627049745" duration="4989000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91688000" />
+    <option name="totallyTimeSpent" value="91993000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -662,8 +661,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ReLearning/ReLearning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="62" column="36" lean-forward="true" selection-start-line="62" selection-start-column="36" selection-end-line="62" selection-end-column="36" />
+        <state relative-caret-position="360">
+          <caret line="61" column="33" lean-forward="true" selection-start-line="61" selection-start-column="33" selection-end-line="61" selection-end-column="33" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>

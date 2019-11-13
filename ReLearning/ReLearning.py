@@ -32,7 +32,6 @@ def training_loop(config: Config):
         global_step = tf.get_variable(name='global_step', initializer=tf.constant(0), trainable=False,
                                       aggregation=tf.VariableAggregation.ONLY_FIRST_REPLICA)
         print("Constructing networks...")
-        fixed_x = tf.placeholder(tf.float32, [None, 128, 128, 3])
         Encoder = ImagenetModel(resnet_size=50, num_classes=None, name='vgg_alter')
         Dense = tf.layers.Dense(1000, name='Final_dense')
         learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,

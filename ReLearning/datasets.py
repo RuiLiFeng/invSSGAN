@@ -131,9 +131,9 @@ def build_data_input_pipeline_from_hdf5(root, batch_size, gpu_nums, load_in_mem,
     gen_labeled = h5set.gen_labeled_from_mem if load_in_mem else h5set.gen_labeled_from_file
     gen_unlabeled = h5set.gen_unlabeled_from_mem if load_in_mem else h5set.gen_unlabeled_from_file
     labeled_dset = tf.data.Dataset.from_generator(gen_labeled, (tf.float32, tf.int32),
-                                                  output_shapes=([128, 128, 3], []))
+                                                  output_shapes=([3, 128, 128], []))
     unlabeled_dset = tf.data.Dataset.from_generator(gen_unlabeled, (tf.float32, tf.int32),
-                                                    output_shapes=([128, 128, 3], []))
+                                                    output_shapes=([3, 128, 128], []))
     print('Making tensorflow datasets with length %d (labeled) and %d (unlabeled) from the'
           'whole datasets of length % d' % (h5set.labeled_num, h5set.unlabeled_num, len(h5set)))
     labeld_dset = labeled_dset.map(map_func=parser_fn,
@@ -148,7 +148,7 @@ def build_data_input_pipeline_from_hdf5(root, batch_size, gpu_nums, load_in_mem,
 
 def build_eval_dset(root, gpu_nums, batch_size, shuffle_buffer_size=10000):
     npdset = np_dset(root)
-    dset = tf.data.Dataset.from_generator(npdset.gen, (tf.float32, tf.int32), output_shapes=([128, 128, 3], []))
+    dset = tf.data.Dataset.from_generator(npdset.gen, (tf.float32, tf.int32), output_shapes=([3, 128, 128], []))
     print('Making dataset of length %d' % len(npdset))
     dset = dset.map(map_func=parser_fn, num_parallel_calls=2 * gpu_nums).shuffle(shuffle_buffer_size).batch(
         batch_size, drop_remainder=True).repeat().prefetch(tf.contrib.data.AUTOTUNE)
