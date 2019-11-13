@@ -112,8 +112,10 @@ def make_index(labeled_per_class, labels):
                 ed = index
                 all_index_in_this_class = np.arange(st, ed)
                 np.random.shuffle(all_index_in_this_class)
-                labeled_list = labeled_list + list(all_index_in_this_class[:labeled_per_class].sort())
-                unlabeled_list = unlabeled_list + list(all_index_in_this_class[labeled_per_class:].sort())
+                labeled_part = all_index_in_this_class[:labeled_per_class]
+                unlabeled_part = all_index_in_this_class[labeled_per_class:]
+                labeled_list = labeled_list + list(labeled_part.sort())
+                unlabeled_list = unlabeled_list + list(unlabeled_part.sort())
                 st = ed
     return labeled_list, unlabeled_list
 
