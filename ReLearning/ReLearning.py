@@ -44,7 +44,7 @@ def training_loop(config: Config):
             w = Dense(w)
             label = tf.one_hot(label, 1000)
             loss = tf.nn.softmax_cross_entropy_with_logits_v2(label, w)
-            print(loss)
+            loss = tf.reduce_mean(loss)
 
             add_global = global_step.assign_add(1)
             update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
@@ -54,7 +54,6 @@ def training_loop(config: Config):
                     return tf.identity(loss)
         loss_run = strategy.experimental_run_v2(train_step, dataset.get_next())
         loss = strategy.reduce(tf.distribute.ReduceOp.MEAN, loss_run, axis=None)
-        print(loss)
         print("Building eval module...")
 
         def eval_step(image, label):
