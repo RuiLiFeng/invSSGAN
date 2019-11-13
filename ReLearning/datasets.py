@@ -108,14 +108,15 @@ def make_index(labeled_per_class, labels):
     for index in tqdm(range(len(labels))):
         if index > 0:
             if labels[index] != labels[index - 1]:
-                print(index)
                 ed = index
                 all_index_in_this_class = np.arange(st, ed)
                 np.random.shuffle(all_index_in_this_class)
                 labeled_part = all_index_in_this_class[:labeled_per_class]
                 unlabeled_part = all_index_in_this_class[labeled_per_class:]
-                labeled_list = labeled_list + list(labeled_part.sort())
-                unlabeled_list = unlabeled_list + list(unlabeled_part.sort())
+                labeled_part.sort()
+                unlabeled_part.sort()
+                labeled_list = labeled_list + list(labeled_part)
+                unlabeled_list = unlabeled_list + list(unlabeled_part)
                 st = ed
     return labeled_list, unlabeled_list
 
