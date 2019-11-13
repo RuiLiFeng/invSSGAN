@@ -45,7 +45,7 @@ parser.add_argument('--alpha', type=float, default=0.02,
                     help='seed for np')
 parser.add_argument('--beta', type=float, default=0.1,
                     help='seed for np')
-parser.add_argument('--model_dir_root', type=str, default='/gdata1/fengrl/SSGAN',
+parser.add_argument('--model_dir_root', type=str, default='/gdata1/fengrl/ReLearning',
                     help='seed for np')
 parser.add_argument('--h5root', type=str, default='/gpub/temp/imagenet2012/hdf5/ILSVRC128.hdf5',
                     help='seed for np')

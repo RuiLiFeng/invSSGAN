@@ -127,7 +127,7 @@ def parser_fn(img, label):
 
 def build_data_input_pipeline_from_hdf5(root, batch_size, gpu_nums, load_in_mem,
                                         labeled_per_class, save_index_dir, shuffle_buffer_size=10000):
-    h5set = Fdset_np(root, load_in_mem, batch_size / 4, labeled_per_class, save_index_dir)
+    h5set = Fdset_np(root, load_in_mem, batch_size // 4, labeled_per_class, save_index_dir)
     gen_labeled = h5set.gen_labeled_from_mem if load_in_mem else h5set.gen_labeled_from_file
     gen_unlabeled = h5set.gen_unlabeled_from_mem if load_in_mem else h5set.gen_unlabeled_from_file
     labeled_dset = tf.data.Dataset.from_generator(gen_labeled, (tf.float32, tf.int32),
