@@ -24,6 +24,13 @@ class Timer(object):
         return self._duration
 
     @property
+    def duration_format(self):
+        du = self.duration
+        mins, du = divmod(du, 60)
+        hours, mins = divmod(mins, 60)
+        return '%d hours, %d mins, %f secs' % (hours, mins, du % 60)
+
+    @property
     def runing_time(self):
         return self._last_update_time - self._init_time
 

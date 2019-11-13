@@ -85,11 +85,14 @@ def training_loop(config: Config):
                           (iteration, loss_, lr_, timer.runing_time_format))
                 if iteration % config.eval_per_steps == 0:
                     timer.update()
+                    print('Starting eval...')
                     precise_ = 0.0
                     eval_iters = 50000 // config.batch_size
                     for _ in range(2 * eval_iters):
                         precise_ += sess.run(precise)
                     precise_ = precise_ / 2 * eval_iters
+                    timer.update()
+                    print('Eval consuming time %s' % timer.duration_format)
                     print('step %d, precision %f in eval dataset of length %d' %
                           (iteration, precise_, 1000 * config.batch_size))
                 if iteration % config.save_per_steps == 0:
