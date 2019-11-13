@@ -43,8 +43,7 @@ def training_loop(config: Config):
         def train_step(image, label):
             w = Encoder(image, training=True)
             w = Dense(w)
-            print(w)
-            print(label)
+            label = tf.one_hot(label, 1000)
             loss = tf.nn.softmax_cross_entropy_with_logits_v2(label, w)
 
             add_global = global_step.assign_add(1)
