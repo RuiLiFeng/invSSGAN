@@ -60,6 +60,7 @@ def training_loop(config: Config):
             w = Encoder(image, training=True)
             w = Dense(w)
             p = tf.math.argmax(w)
+            p = tf.cast(p, tf.int32)
             precise = tf.reduce_mean(tf.cast(tf.equal(p, label), tf.float32))
             return precise
 

@@ -107,7 +107,7 @@ def make_index(labeled_per_class, labels):
     print('Generating few shot index list with %d index per class' % labeled_per_class)
     for index in tqdm(range(len(labels))):
         if index > 0:
-            if labels[index] != labels[index - 1]:
+            if labels[index] != labels[index - 1] or index == len(labels) - 1:
                 ed = index
                 all_index_in_this_class = np.arange(st, ed)
                 np.random.shuffle(all_index_in_this_class)
