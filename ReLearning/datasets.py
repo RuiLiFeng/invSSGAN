@@ -47,7 +47,7 @@ class Fdset_np(object):
     def gen_labeled_from_mem(self):
         for i in self.labeled_shuffle_index:
             index = self.labeled_index[i]
-            yield self.img[index + 1], self.label[index + 1]
+            yield self.img[index], self.label[index]
 
     def gen_unlabeled_from_file(self):
         for i in self.unlabeled_shuffle_index:
@@ -58,7 +58,7 @@ class Fdset_np(object):
     def gen_unlabeled_from_mem(self):
         for i in self.unlabeled_shuffle_index:
             index = self.unlabeled_index[i]
-            yield self.img[index + 1], self.label[index + 1]
+            yield self.img[index], self.label[index]
 
     def fixed_sample_np(self):
         index = np.random.randint(0, self.num_imgs, self.sample_batch_size)
@@ -108,6 +108,7 @@ def make_index(labeled_per_class, labels):
     for index in tqdm(range(len(labels))):
         if index > 0:
             if labels[index] != labels[index - 1]:
+                print(index)
                 ed = index
                 all_index_in_this_class = np.arange(st, ed)
                 np.random.shuffle(all_index_in_this_class)
