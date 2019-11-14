@@ -145,7 +145,7 @@ def training_loop(config: Config):
             saver_g = tf.train.Saver(restore_g, restore_sequentially=True)
             saver_e = tf.train.Saver(Encoder.trainable_variables, restore_sequentially=True)
             saver_assgin = tf.train.Saver(Assgin_net.trainable_variables, restore_sequentially=True)
-            saver_bn = tf.train.Saver(BN_net.trainable_variables, restore_sequentially=True)
+            saver_ebn = tf.train.Saver(BN_net.trainable_variables, restore_sequentially=True)
         print("Start training...")
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
             sess.run(init)
@@ -156,7 +156,7 @@ def training_loop(config: Config):
                 if config.resume_assgin:
                     saver_assgin.restore(sess, config.restore_assgin_dir)
                     if config.resume_ebn:
-                        saver_assgin.restore(sess, config.restore_ebn_dir)
+                        saver_ebn.restore(sess, config.restore_ebn_dir)
             save_image_grid(fixed_img, filename=config.model_dir + '/reals.png')
             timer.update()
 
@@ -181,7 +181,7 @@ def training_loop(config: Config):
                                  global_step=iteration, write_meta_graph=False)
                     saver_assgin.save(sess, save_path=config.model_dir + '/assgin.ckpt',
                                       global_step=iteration, write_meta_graph=False)
-                    saver_bn.save(sess, save_path=config.model_dir + '/bn.ckpt',
+                    saver_ebn.save(sess, save_path=config.model_dir + '/bn.ckpt',
                                   global_step=iteration, write_meta_graph=False)
 
 
