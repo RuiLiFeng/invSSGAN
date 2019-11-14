@@ -59,9 +59,8 @@ def training_loop(config: Config):
         def eval_step(image, label):
             w = Encoder(image, training=True)
             w = Dense(w)
-            p = tf.math.argmax(w)
+            p = tf.math.argmax(w, 1)
             p = tf.cast(p, tf.int32)
-            label = tf.one_hot(label, 1000, dtype=tf.int32)
             precise = tf.reduce_mean(tf.cast(tf.equal(p, label), tf.float32))
             return precise
 
@@ -90,14 +89,14 @@ def training_loop(config: Config):
                     timer.update()
                     print('Starting eval...')
                     precise_ = 0.0
-                    eval_iters = 50000 // config.batch_size
+                    eval_iters = 50000 // config.batch_size // config.gpu_nums
                     for _ in range(2 * eval_iters):
                         precise_ += sess.run(precise)
-                    precise_ = precise_ / 2 * eval_iters
+                    precise_ = precise_ / (2 * eval_iters)
                     timer.update()
                     print('Eval consuming time %s' % timer.duration_format)
                     print('step %d, precision %f in eval dataset of length %d' %
-                          (iteration, precise_, 1000 * config.batch_size))
+                          (iteration, precise_, eval_iters * config.batch_size))
                 if iteration % config.save_per_steps == 0:
                     saver_dense.save(sess, save_path=config.model_dir + '/dense.ckpt',
                                      global_step=iteration, write_meta_graph=False)

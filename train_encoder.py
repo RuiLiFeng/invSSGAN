@@ -25,6 +25,8 @@ parser.add_argument('--seed', type=int, default=23,
                     help='seed for np')
 parser.add_argument('--gpu_nums', type=int, default=4,
                     help='seed for np')
+parser.add_argument('--total_step', type=int, default=250000,
+                    help='seed for np')
 parser.add_argument('--eval_per_steps', type=int, default=2000,
                     help='seed for np')
 parser.add_argument('--save_per_steps', type=int, default=2000,

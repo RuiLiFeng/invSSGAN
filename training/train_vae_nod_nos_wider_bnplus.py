@@ -155,6 +155,8 @@ def training_loop(config: Config):
                 saver_e.restore(sess, config.restore_v_dir)
                 if config.resume_assgin:
                     saver_assgin.restore(sess, config.restore_assgin_dir)
+                    if config.resume_ebn:
+                        saver_assgin.restore(sess, config.restore_ebn_dir)
             save_image_grid(fixed_img, filename=config.model_dir + '/reals.png')
             timer.update()
 
