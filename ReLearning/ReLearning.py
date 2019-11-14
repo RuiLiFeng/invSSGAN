@@ -93,7 +93,6 @@ def training_loop(config: Config):
                     print(eval_iters)
                     for _ in range(2 * eval_iters):
                         precise_ += sess.run(precise)
-                        print(precise_)
                     precise_ = precise_ / (2 * eval_iters)
                     timer.update()
                     print('Eval consuming time %s' % timer.duration_format)
