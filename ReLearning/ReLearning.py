@@ -89,9 +89,11 @@ def training_loop(config: Config):
                     timer.update()
                     print('Starting eval...')
                     precise_ = 0.0
-                    eval_iters = 50000 // config.batch_size // config.gpu_nums
+                    eval_iters = 50000 // config.batch_size
+                    print(eval_iters)
                     for _ in range(2 * eval_iters):
                         precise_ += sess.run(precise)
+                        print(precise_)
                     precise_ = precise_ / (2 * eval_iters)
                     timer.update()
                     print('Eval consuming time %s' % timer.duration_format)
