@@ -90,7 +90,6 @@ def training_loop(config: Config):
                     print('Starting eval...')
                     precise_ = 0.0
                     eval_iters = 50000 // config.batch_size
-                    print(eval_iters)
                     for _ in range(2 * eval_iters):
                         precise_ += sess.run(precise)
                     precise_ = precise_ / (2 * eval_iters)
