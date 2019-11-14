@@ -87,6 +87,8 @@ class np_dset(object):
         with h5.File(root, 'r') as f:
             self.img = f['imgs'][:]
             self.label = f['labels'][:]
+        self.label = np.load(root.replace('ILSVRC128_eval.hdf5', 'val_dict_labels.npy'))
+
         self.num_imgs = len(self.label)
         self.index = np.arange(self.num_imgs)
         np.random.shuffle(self.index)
