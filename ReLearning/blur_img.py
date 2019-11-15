@@ -69,7 +69,7 @@ def training_loop(config: Config):
             w = Encoder(image, training=True)
             w = Assgin_net(w)
             x, _ = Generator(w, None, True)
-            w = ResNet(w, True)
+            w = ResNet(x, True)
             p = tf.math.argmax(w, 1)
             p = tf.cast(p, tf.int32)
             precise = tf.reduce_mean(tf.cast(tf.equal(p, label), tf.float32))

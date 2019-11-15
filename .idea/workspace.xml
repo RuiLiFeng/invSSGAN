@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ReLearning/En_wider.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ReLearning/blur_img.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ReLearning/resnet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_rep.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_rep.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +58,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ReLearning/blur_img.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2126">
@@ -105,10 +103,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_rep.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
+            <state relative-caret-position="324">
               <caret line="36" column="39" lean-forward="true" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
@@ -164,7 +162,6 @@
         <option value="$PROJECT_DIR$/training/train_vae_nod_nos_wider_cir.py" />
         <option value="$PROJECT_DIR$/training/representation_learning.py" />
         <option value="$PROJECT_DIR$/utils/training_utils.py" />
-        <option value="$PROJECT_DIR$/train_rep.py" />
         <option value="$PROJECT_DIR$/train_encoder.py" />
         <option value="$PROJECT_DIR$/training/train_vae_nod_nos_wider_bnplus.py" />
         <option value="$PROJECT_DIR$/ReLearning/datasets.py" />
@@ -173,6 +170,7 @@
         <option value="$PROJECT_DIR$/ReLearning/En_wider.py" />
         <option value="$PROJECT_DIR$/ReLearning/resnet.py" />
         <option value="$PROJECT_DIR$/ReLearning/blur_img.py" />
+        <option value="$PROJECT_DIR$/train_rep.py" />
       </list>
     </option>
   </component>
@@ -259,12 +257,12 @@
       <workItem from="1573091743659" duration="16745000" />
       <workItem from="1573548318733" duration="11774000" />
       <workItem from="1573627049745" duration="9337000" />
-      <workItem from="1573699833721" duration="17059000" />
+      <workItem from="1573699833721" duration="17594000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113400000" />
+    <option name="totallyTimeSpent" value="113935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -610,16 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train_rep.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="36" column="39" lean-forward="true" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ReLearning/ReLearning.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -680,6 +668,16 @@
           <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train_rep.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="36" column="39" lean-forward="true" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
