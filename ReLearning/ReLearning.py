@@ -35,7 +35,7 @@ def training_loop(config: Config):
         Encoder = ImagenetModel(resnet_size=50, num_classes=None, name='vgg_alter')
         Dense = tf.layers.Dense(1000, name='Final_dense')
         learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
-                                                   0.8, staircase=False)
+                                                   config.lr_decay_coef, staircase=False)
         Dense_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta2=config.beta2)
         print("Building tensorflow graph...")
 
