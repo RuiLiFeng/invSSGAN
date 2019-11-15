@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6c296d6e-1917-4713-bcb2-289357b223d9" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/ReLearning/En_wider.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReLearning/blur_img.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/ReLearning/resnet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -15,22 +16,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/training/train_encoder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="133" column="74" lean-forward="true" selection-start-line="128" selection-start-column="12" selection-end-line="133" selection-end-column="74" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos_wider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="151" column="73" lean-forward="true" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="73" />
+            <state relative-caret-position="314">
+              <caret line="142" column="35" lean-forward="true" selection-start-line="142" selection-end-line="143" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -62,11 +51,35 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ReLearning/resnet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="101" column="72" selection-start-line="101" selection-start-column="72" selection-end-line="101" selection-end-column="72" />
+            <state relative-caret-position="1296">
+              <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ReLearning/blur_img.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2126">
+              <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/network/resnet_biggan_ssgan.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1270">
+              <caret line="251" column="29" selection-start-line="251" selection-start-column="29" selection-end-line="251" selection-end-column="29" />
+              <folding>
+                <element signature="e#2316#2354#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,15 +89,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="324">
               <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ReLearning/ssgan_disc.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-756">
-              <caret line="82" column="26" lean-forward="true" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -168,6 +172,7 @@
         <option value="$PROJECT_DIR$/ReLearning/ReLearning.py" />
         <option value="$PROJECT_DIR$/ReLearning/En_wider.py" />
         <option value="$PROJECT_DIR$/ReLearning/resnet.py" />
+        <option value="$PROJECT_DIR$/ReLearning/blur_img.py" />
       </list>
     </option>
   </component>
@@ -254,18 +259,17 @@
       <workItem from="1573091743659" duration="16745000" />
       <workItem from="1573548318733" duration="11774000" />
       <workItem from="1573627049745" duration="9337000" />
-      <workItem from="1573699833721" duration="16472000" />
+      <workItem from="1573699833721" duration="17059000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112813000" />
+    <option name="totallyTimeSpent" value="113400000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17803837" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17803837" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -279,7 +283,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.329718" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.14316703" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.27982646" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.27982646" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49946696" weight="0.23644252" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -461,16 +465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/network/resnet_biggan_ssgan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8604">
-          <caret line="251" column="29" selection-start-line="251" selection-start-column="29" selection-end-line="251" selection-end-column="29" />
-          <folding>
-            <element signature="e#2316#2354#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/training/representation_learning.py" />
     <entry file="file://$PROJECT_DIR$/training/dvae.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -643,16 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos_wider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="151" column="73" lean-forward="true" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ReLearning/En_wider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2556">
@@ -665,8 +649,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ReLearning/resnet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="101" column="72" selection-start-line="101" selection-start-column="72" selection-end-line="101" selection-end-column="72" />
+        <state relative-caret-position="1296">
+          <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/training/train_vae_nod_nos_wider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="142" column="35" lean-forward="true" selection-start-line="142" selection-end-line="143" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/network/resnet_biggan_ssgan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1270">
+          <caret line="251" column="29" selection-start-line="251" selection-start-column="29" selection-end-line="251" selection-end-column="29" />
+          <folding>
+            <element signature="e#2316#2354#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ReLearning/blur_img.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2126">
+          <caret line="140" lean-forward="true" selection-start-line="140" selection-end-line="140" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
