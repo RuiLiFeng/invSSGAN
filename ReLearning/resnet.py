@@ -35,7 +35,7 @@ def training_loop(config: Config):
         Encoder = ImagenetModel(resnet_size=50, num_classes=None, name='vgg_alter')
         Dense = tf.layers.Dense(1000, name='Final_dense')
         learning_rate = tf.train.exponential_decay(config.lr, global_step, 60000,
-                                                   0.8, staircase=False)
+                                                   config.lr_decay_coef, staircase=False)
         Dense_solver = tf.train.AdamOptimizer(learning_rate=learning_rate, name='e_opt', beta2=config.beta2)
         print("Building tensorflow graph...")
 
@@ -76,7 +76,8 @@ def training_loop(config: Config):
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
             sess.run(init)
             print("Restore Encoder...")
-            saver_e.restore(sess, config.restore_v_dir)
+            if config.resume:
+                saver_e.restore(sess, config.restore_v_dir)
             timer.update()
             print("Completing all work, iteration now start, consuming %s " % timer.runing_time_format)
             print("Start iterations...")
