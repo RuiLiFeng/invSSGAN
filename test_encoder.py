@@ -66,6 +66,8 @@ w = BN_net(w, True)
 fake_, _ = Generator(w, y=None, is_training=True)
 fake_ss_, _ = Generator(wz, y=None, is_training=True)
 fake_ss_w = Encoder(fake_ss_, training=True)
+fake_ss_w = Assgin_net(fake_ss_w)
+fake_ss_w = BN_net(fake_ss_w, True)
 fake_final_, _ = Generator(fake_ss_w, None, is_training=True)
 
 with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
